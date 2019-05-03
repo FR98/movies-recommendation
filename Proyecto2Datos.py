@@ -3,27 +3,72 @@
 # Francisco Rosal 18676
 # Programa de recomendacion de peliculas
 
-from neo4j.v1 import GraphDatabase, basic_auth
+# from neo4j.v1 import GraphDatabase, basic_auth
 
-class DataBase(object):
+class MovieRecommender(object):
 
-    def __init__(self, uri, user, password):
-        self._driver = GraphDatabase.driver(uri, auth=(user, password))
+    def __init__(self):
+        print("Hello World")
 
-    def close(self):
-        self._driver.close()
 
-    def print_greeting(self, message):
-        with self._driver.session() as session:
-            greeting = session.write_transaction(self._create_and_return_greeting, message)
-            print(greeting)
+def menu():
+    print("""
+    Menu:
+1. Show movies you liked
+2. Add movie to your list
+3. Find movies related to
+4. Salir
+    """)
 
-    @staticmethod
-    def _create_and_return_greeting(tx, message):
-        result = tx.run("CREATE (a:Greeting) "
-                        "SET a.message = $message "
-                        "RETURN a.message + ', from node ' + id(a)", message=message)
-        return result.single()[0]
+print("Welcome to the movie recommender")
+mr = MovieRecommender()
+
+continuar = True
+while continuar:
+    menu()
+    option = input("Option: ")
+
+    if (option == "1"):
+        print("Movies you liked:")
+        # Show Movies
+    elif (option == "2"):
+        newMovie = input("Enter the name of the movie you liked: ")
+        # Algo mas
+    elif (option == "3"):
+        findRelateTo = input("Enter the name of the movie: ")
+        # Algo mas
+    elif (option == "4"):
+        print("Bye bye")
+        continuar = False
+    else:
+        print("Wrong option!")
+
+
+
+
+
+
+
+
+# class DataBase(object):
+#
+#     def __init__(self, uri, user, password):
+#         self._driver = GraphDatabase.driver(uri, auth=(user, password))
+#
+#     def close(self):
+#         self._driver.close()
+#
+#     def print_greeting(self, message):
+#         with self._driver.session() as session:
+#             greeting = session.write_transaction(self._create_and_return_greeting, message)
+#             print(greeting)
+#
+#     @staticmethod
+#     def _create_and_return_greeting(tx, message):
+#         result = tx.run("CREATE (a:Greeting) "
+#                         "SET a.message = $message "
+#                         "RETURN a.message + ', from node ' + id(a)", message=message)
+#         return result.single()[0]
 
 
 # ----------------------------------------------
