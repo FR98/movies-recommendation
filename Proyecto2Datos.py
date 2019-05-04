@@ -10,22 +10,29 @@ class MovieRecommender(object):
     def __init__(self):
         print("Hello World")
 
+    def addNewMovie():
+        # Agrega una nueva pelicula y hace los enlaces
+        print("Hello World")
 
-def menu():
-    print("""
-    Menu:
-1. Show movies you liked
-2. Add movie to your list
-3. Find movies related to
-4. Salir
-    """)
+    def recommendMe():
+        # Hace la busqueda en la base de datos
+        print("Hello World")
+
+    def menu():
+        print("""
+        Menu:
+    1. Show movies you liked
+    2. Add movie to your list
+    3. Find movies related to
+    4. Salir
+        """)
 
 print("Welcome to the movie recommender")
 mr = MovieRecommender()
 
 continuar = True
 while continuar:
-    menu()
+    mr.menu()
     option = input("Option: ")
 
     if (option == "1"):
