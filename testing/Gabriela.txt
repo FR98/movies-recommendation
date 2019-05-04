@@ -1,0 +1,64 @@
+TESTING
+Nota: Los datos analizados hacen referencia a los nodos y relaciones del grafo de la imagen incluida "grafosTesting.PNG"
+--------------------------------------------------------------
+Algoritmo: Prioridad
+
+You: Gabriela Lopez
+
+    Peliculas que le gustan:
+        Movie 3: Mamma Mia
+        Movie 5: Loco y estupido amor
+
+    Entonces:
+        Movie 1: Sing, you sinners
+        Movie 2: Hairspray
+        Movie 4: Alguien tiene que ceder
+        Actor 1: Meryl Streep
+        Actor 2: Steve Carell
+
+    Buscar pelicula similar por genero:
+        Sing, you sinners
+
+    Cantidad de similitudes de genero:
+        Comedia musical, comedia romantica = 2
+
+    Cantidad de similitudes de actor:
+        Steve Carell, Ryan Goslin, Emma Stone... = 10
+
+    (Otras categorias son omitidas para el testing)
+        Otra categoria = 3
+
+    Obtener el valor de Match:
+        (0.5(2) + 0.25(10) + 0.25(3)) / 2 + 10 + 3 = 0.28
+
+    Se ordena y se retorna
+
+
+-------------------------------------------------------------------
+
+Algoritmo: Indice de Jaccard
+
+You:  Gabriela Lopez
+
+    Peliculas que le gustan:
+        Movie 3: Mamma Mia
+        Movie 5: Loco y estupido amor
+
+    Entonces:
+        Movie 1: Sing, you sinners
+        Movie 2: Hairspray
+        Movie 4: Alguien tiene que ceder
+        Actor 1: Meryl Streep
+        Actor 2: Steve Carell
+
+    Obtener las peliculas que tienen las mismas propiedades (intersección):
+        Entre: Sing, you sinners y Mamma Mia
+        Intersección: genero, Steve Carell
+        Cantidad: 2
+
+    Obtener la union de estos conjuntos que es la suma del conjunto 1 con los elementos del conjunto 2 que no tiene el conjunto 1:
+        Union: director, Meryl Streep, genero, Steve Carell, productor, calificacion, premio
+        Cantidad: 7
+
+    Se calcula el indice de Jaccard y se ordena por este:
+        ((1.0*2) / SIZE(7)) = 0.29 *(Siempre sera el mismo valor porque esta basado en el mismo grafo por falta de base de datos, con diferentes datos.)

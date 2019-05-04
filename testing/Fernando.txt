@@ -1,0 +1,65 @@
+TESTING
+Nota: Los datos analizados hacen referencia a los nodos y relaciones del grafo de la imagen incluida "grafosTesting.PNG"
+--------------------------------------------------------------
+Algoritmo: Prioridad
+
+You: Fernando Castañeda:
+
+    Peliculas que le gustan:
+        Movie 3: La maldiction de la llorona
+        Movie 5: Soy leyenda
+
+    Entonces:
+        Movie 1: Annabelle
+        Movie 2: La  monja
+        Movie 4: I am omega
+        Actor 1: Will Smith
+        Actor 2: Marisol Ramirez
+
+    Buscar pelicula similar por genero:
+        Annabelle
+
+    Cantidad de similitudes de genero:
+        Novela, Terror sobrenatural = 2
+
+    Cantidad de similitudes de actor:
+        Willow Smith, Alice Braga, Linda Cardellini... = 10
+
+    (Otras categorias son omitidas para el testing)
+        Otra categoria = 3
+
+    Obtener el valor de Match:
+        (0.5(2) + 0.25(10) + 0.25(3)) / 2 + 10 + 3 = 0.28
+
+    Se ordena y se retorna
+
+
+-------------------------------------------------------------------
+
+Algoritmo: Indice de Jaccard
+
+You: Fernando Castañeda:
+
+    Peliculas que le gustan:
+        Movie 3: La maldiction de la llorona
+        Movie 5: Soy leyenda
+
+    Entonces:
+        Movie 1: Annabelle
+        Movie 2: La  monja
+        Movie 4: I am omega
+        Actor 1: Will Smith
+        Actor 2: Marisol Ramirez
+
+
+    Obtener las peliculas que tienen las mismas propiedades (intersección):
+        Entre: Annabelle y La maldicion de la llorona
+        Intersección: genero, Marisol Ramirez
+        Cantidad: 2
+
+    Obtener la union de estos conjuntos que es la suma del conjunto 1 con los elementos del conjunto 2 que no tiene el conjunto 1:
+        Union: director, Will Smith, genero, Marisol Ramirez, productor, calificacion, premio
+        Cantidad: 7
+
+    Se calcula el indice de Jaccard y se ordena por este:
+        ((1.0*2) / SIZE(7)) = 0.29 *(Siempre sera el mismo valor porque esta basado en el mismo grafo por falta de base de datos, con diferentes datos.)
