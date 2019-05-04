@@ -1,0 +1,33 @@
+TESTING
+
+Pablo Rosal:
+Algoritmo: Prioridad
+
+Peliculas que le gustan:
+Movie 3: Iron Man 3
+Movie 5: Avengers Age of Ultron
+
+Entonces:
+Movie 1: Avengers 1
+Movie 2: Ant Man
+Movie 4: La vida es bella
+Actor 1: Chris Hemsworth
+Actor 2: Robert Downey Jr.
+
+Buscar pelicula similar por genero:
+Avengers 1
+
+Cantidad de similitudes de genero:
+Action, SuperHeroes = 2
+
+Cantidad de similitudes de actor:
+Chris Hemsworth, Robert Downey Jr., Scarlett Johansson... = 10
+
+(Otras categorias son omitidas para el testing)
+Otra categoria = 3
+
+Obtener el valor de Match:
+
+(0.5(2) + 0.25(10) + 0.25(3)) / 2 + 10 + 3 = 0.28
+
+Se ordena y se retorna
