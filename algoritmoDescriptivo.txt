@@ -1,0 +1,68 @@
+# ALGORITMO PARA SISTEMA DE RECOMENDACION DE PELICULAS
+# Algoritmos y Estructuras de Datos
+# Proyecto 2
+# Gian Luca Rivera 18049
+# Francisco Rosal 18676
+
+# Descripcion de nuestro algoritmo de recomendacion:
+# Nuestro algortimo estará basado en Content-Based Filtering, en el cual el usuario escoge
+# peliculas que le gusten y a partir del contenido de la informacion se recomiendan otras peliculas.
+#-------------------------------------------------------------------------------------------
+#       ALGORITMO DE RECOMENDACION BASADO EN PRIORIDAD DE PROPIEDAD
+
+# Se buscaran similitudes basada en generos segun las peliculas ya vistas por el usuario
+# ya que es lo que mayor afecta en la decision de las personas al buscar una pelicula.
+# Al filtrar por genero se obtendra un numero que indica la cantidad de similitudes existentes con las peliculas de gusto del usuario.
+# Se hace igualmente con los actores, productora, calificacion, y director, reduciendoce cada vez mas la cantidad de opciones.
+# Se muestran los valores en comun de cada conjunto por separado.
+# Al finalizar se obtiene el puntaje de coincidencia haciendo una suma de los valores obtenidos, cada uno multiplicado por un numero
+# el cual es la prioridad que se le da a ese valor, a esta suma se le divide la suma de los valores obtenidos.
+# Se ordena la lista obtenida por ese puntaje de coincidencia y se retorna.
+
+# ALGORITMO DE PRIORIDAD DE PROPIEDAD EN CYPHER
+MATCH (user:User {name: "User name"})-[liked:LIKED]->(movie:Movie)
+
+MATCH (movie)-[:IN_GENRE]->(genre:Genre)<-[:IN_GENRE]-(rec:Movie) WHERE NOT EXISTS( (user)-[:LIKED]->(rec) )
+WITH user, movie, rec, COUNT(genre) AS genreSelection
+MATCH (movie)<-[:ACTED_IN]-(actor:Actor)-[:ACTED_IN]->(rec)
+WITH user, movie, rec, genreSelection, COUNT(actor) AS actorSelection
+MATCH (movie)<-[:PRODUCED]-(productor:Productor)-[:PRODUCED]->(rec)
+WITH user, movie, rec, genreSelection, actorSelection, COUNT(productor) AS productorSelection
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(director:Director)-[:DIRECTED]->(rec)
+WITH user, movie, rec, genreSelection, actorSelection, productorSelection, COUNT(director) AS directorSelection
+
+MATCH (movie)-[:IN_GENRE|:ACTED_IN|:DIRECTED]-(mov)
+WITH user, movie, rec, genreSelection, actorSelection, productorSelection, directorSelection, COLLECT(mov.name) AS conjunto1
+MATCH (rec)-[:IN_GENRE|:ACTED_IN|:DIRECTED]-(re)
+WITH user, movie, rec, genreSelection, actorSelection, productorSelection, directorSelection, conjunto1, COLLECT(re.name) AS conjunto2
+
+RETURN user.name AS User, rec.title AS Recommendation, rec.year AS Year, conjunto1 AS Props1, conjunto2 AS Props2,
+    genreSelection AS GenreMatch, actorSelection AS ActorMatch, productorSelection AS ProductorMatch, directorSelection AS DirectorMatch,
+    ((0.5*genreSelection)+(0.25*actorSelection)+(0.25*directorSelection))/(genreSelection+actorSelection+directorSelection) AS MatchScore
+ORDER BY MatchScore DESC LIMIT 50
+
+#-------------------------------------------------------------------------------------------
+#       ALGORITMO DE RECOMENDACION BASADO EN INDICE DE JACCARD
+# Se utilizara el indice de Jaccard que es un numero entre 0 y 1 que indica la similitud de
+# dos conjuntos. Este se calcula dividiendo el tamaño de la intersección de dos conjuntos por la unión
+# de los dos conjuntos. Para esto se obtiene las peliculas de agrado de un usuario y se compara con todas
+# las peliculas para obtener las que tienen las mismas propiedades; a este resultado se le conoce como intersección
+# de dos conjuntos. Se muestran los valores en comun de cada conjunto por separado. Y luego se obtiene la union de estos
+# conjuntos que es la suma del conjunto 1 con los elementos del conjunto 2 que no tiene el conjunto 1. Se calcula el
+# indice de Jaccard y se ordena por este.
+
+# ALGORITMO DE PROPIEDAD EN CYPHER
+MATCH (user:User {name: "User name"})-[liked:LIKED]->(movie:Movie)
+MATCH (movie:Movie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(filtered)<-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(rec:Movie)
+    WHERE NOT EXISTS( (user)-[:LIKED]->(rec) )
+WITH movie, rec, COUNT(filtered) AS intersection
+
+MATCH (movie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(mov)
+WITH movie, rec, intersection, COLLECT(mov.name) AS conjunto1
+MATCH (rec)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(re)
+WITH movie, rec, intersection, conjunto1, COLLECT(re.name) AS conjunto2
+
+WITH movie, rec, intersection, conjunto1, conjunto2, conjunto1 + filter(i IN conjunto2 WHERE NOT i IN conjunto1) AS union
+RETURN movie.title AS YouLike, rec.title AS Recommendation, conjunto1 AS Props1, conjunto2 AS Props2,
+    ((1.0*intersection) / SIZE(union)) AS JaccardNumber
+ORDER BY JaccardNumber DESC LIMIT 50

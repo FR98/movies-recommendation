@@ -1,5 +1,5 @@
 # Proyecto 2 Estructuras de Datos
-# Gian Luca Rivera 1804
+# Gian Luca Rivera 18049
 # Francisco Rosal 18676
 # Programa de recomendacion de peliculas
 
