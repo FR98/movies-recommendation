@@ -1,33 +1,63 @@
 TESTING
-
-Luis Pedro Valenzuela:
+Nota: Los datos analizados hacen referencia a los nodos y relaciones del grafo de la imagen incluida "grafosTesting.PNG"
+--------------------------------------------------------------
 Algoritmo: Prioridad
 
-Peliculas que le gustan:
-Movie 3: The intern
-Movie 5: About time
+You: Luis Pedro Valenzuela:
 
-Entonces:
-Movie 1: último viaje a las Vegas
-Movie 2: El secreto de mi éxito
-Movie 4: Realmente amor
-Actor 1: Anne Hathaway
-Actor 2: Rachel McAdams
+    Peliculas que le gustan:
+        Movie 3: The intern
+        Movie 5: About time
 
-Buscar pelicula similar por genero:
-Ultimo viaje a las vegas
+    Entonces:
+        Movie 1: último viaje a las Vegas
+        Movie 2: El secreto de mi éxito
+        Movie 4: Realmente amor
+        Actor 1: Anne Hathaway
+        Actor 2: Rachel McAdams
 
-Cantidad de similitudes de genero:
-Drana, Fantasía, Romance, Comedia = 4
+    Buscar pelicula similar por genero:
+        Ultimo viaje a las vegas
 
-Cantidad de similitudes de actor:
-Anne Hathaway, Robert De Niro, Rene Russo... = 10
+    Cantidad de similitudes de genero:
+        Drana, Fantasía, Romance, Comedia = 4
 
-(Otras categorias son omitidas para el testing)
-Otra categoria = 3
+    Cantidad de similitudes de actor:
+        Anne Hathaway, Robert De Niro, Rene Russo... = 10
 
-Obtener el valor de Match:
+    (Otras categorias son omitidas para el testing)
+        Otra categoria = 3
 
-(0.5(2) + 0.25(10) + 0.25(3)) / 2 + 10 + 3 = 0.28
+    Obtener el valor de Match:
+        (0.5(2) + 0.25(10) + 0.25(3)) / 2 + 10 + 3 = 0.28
 
-Se ordena y se retorna
+    Se ordena y se retorna
+
+-------------------------------------------------------------------
+
+Algoritmo: Indice de Jaccard
+
+You: Luis Pedro Valenzuela:
+
+    Peliculas que le gustan:
+        Movie 3: The intern
+        Movie 5: About time
+
+    Entonces:
+        Movie 1: último viaje a las Vegas
+        Movie 2: El secreto de mi éxito
+        Movie 4: Realmente amor
+        Actor 1: Anne Hathaway
+        Actor 2: Rachel McAdams
+
+    Obtener las peliculas que tienen las mismas propiedades (intersección):
+        Entre: Ultimo viaje a las Vegas y The Intern
+        Intersección: genero, Rachel McAdams
+        Cantidad: 2
+
+    Obtener la union de estos conjuntos que es la suma del conjunto 1 con los elementos del conjunto 2 que no tiene el conjunto 1:
+        Union: director, Anne Hathaway, genero, Rachel McAdams, productor, calificacion, premio
+        Cantidad: 7
+
+    Se calcula el indice de Jaccard y se ordena por este:
+        ((1.0*2) / SIZE(7)) = 0.29 *(Siempre sera el mismo valor porque esta basado en el mismo grafo por falta de base de datos, con diferentes datos.)
