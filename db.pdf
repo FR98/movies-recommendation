@@ -4,6 +4,7 @@
 
 // Nodes:
 // Movie {title, year, duration, country}
+// User {name}
 // Person {name}
 // Productor {name}
 // Genre {name}
@@ -11,7 +12,7 @@
 // Award {name}
 
 // Relations:
-// Person -[:LIKED]-> Movie
+// User -[:LIKED]-> Movie
 // Person -[:ACTED_IN]-> Movie
 // Movie -[:IN_GENRE]-> Genre
 // Person -[:DIRECTED]-> Movie
@@ -22,69 +23,660 @@
 
 // Movies
 CREATE
+    //Genero
+    (Accion: Genre {name: 'Accion'}),
+    (Animacion: Genre {name: 'Animacion'}),
+    (Aventura: Genre {name: 'Aventura'}),
+    (CienciaFiccion: Genre {name: 'Ciencia Ficcion'})
+    (Misterio: Genre {name: 'Misterio'}),
+    (Terror: Genre {name: 'Terror'}),
+    (Epico: Genre {name: 'Epico'}),
+    (Fantasia: Genre {name: 'Fantastico'}),
+    (Historico: Genre {name: 'Historico'}),
+    (Musical: Genre {name: 'Musical'}),
+    (Policiaco: Genre {name: 'Policiaco'}),
+    (Romantico: Genre {name: 'Romantico'}),
+    (Comedia: Genre {name: 'Comedia'}),
+    (Drama: Genre {name: 'Drama'}),
+    (Thriller: Genre {name: 'Thriller'}),
+    (Superheroes: Genre {name: 'Superheroes'}),
+    (Guerra: Genre {name: 'Guerra'}),
+    //Calificacion
+    (Una: Calificacion {name: 'Una Estrella'}),
+    (Dos: Calificacion {name: 'Dos Estrellas'}),
+    (Tres: Calificacion {name: 'Tres Estrellas'}),
+    (Cuatro: Calificacion {name: 'Cuatro Estrellas'}),
+    (Cinco: Calificacion {name: 'Cinco Estrellas'}),
+    (Seis: Calificacion {name: 'Seis Estrellas'}),
+    (Siete: Calificacion {name: 'Siete Estrellas'}),
+    (Ocho: Calificacion {name: 'Ocho Estrellas'}),
+    (Nueve: Calificacion {name: 'Nueve Estrellas'}),
+    (Diez: Calificacion {name: 'Diez Estrellas'}),
+
+    //Casas Productoras
+    (Paramount: Productor {name: 'Paramount Pictures'}),
+
+
     (TopGun: Movie {title: "Top Gun", year:1986}),
     (KellyM: Person {name: 'Kelly McGillis'}),
     (TomC: Person {name: 'Tom Cruise'}),
     (ValK: Person {name: 'Val Kilmer'}),
     (TonyS: Person {name: 'Tony Scott'}),
+    (Paramount) -[:PRODUCED]-> (TopGun),
+    (TonyS) -[:DIRECTED]-> (TopGun),
+    (Siete)
+    (Accion)
+    (Drama)
     (TomC) -[:ACTED_IN]-> (TopGun),
     (KellyM) -[:ACTED_IN]-> (TopGun),
     (ValK) -[:ACTED_IN]-> (TopGun),
-    (TonyS) -[:DIRECTED]-> (TopGun),
 
 
     (Apollo13: Movie {title: 'Apollo 13', year:1995}),
     (EdH: Person {name: 'Ed Harris'}),
     (BillPax: Person {name: 'Bill Paxton'}),
     (TomH: Person {name: 'Tom Hanks'}),
-    (RonH: Person {name: 'Ron H'}),
+    (RonH: Person {name: 'Ron Howard'}),
+    (ImagineEntertainment)
+    (RonH) -[:DIRECTED]-> (Apollo13),
+    (Ocho)
+    (Drama)
+    (Aventura)
+    (Historico)
     (TomH) -[:ACTED_IN]-> (Apollo13),
     (EdH) -[:ACTED_IN]-> (Apollo13),
     (BillPax) -[:ACTED_IN]-> (Apollo13),
-    (RonH) -[:DIRECTED]-> (Apollo13),
 
 
     (Up: Movie {title: 'Up : una aventura de altura', year:2009}),
+    (Pixar)
+    (PeteDocter)
+    (BobPeterson)
+    (Ocho)
+    (Animacion)
+    (Aventura)
+    (Comedia)
+
+
     (Enredados: Movie {title: 'Enredados', year:2010}),
+    (WaltDisney)
+    (ByronHowward)
+    (NathanGreno)
+    (Ocho)
+    (Animacion)
+    (Fantasia)
+    (Romantico)
+    (Comedia)
+    (Aventura)
+    (Musical)
+
+
     (Frozen: Movie {title: 'Frozen: una aventura congelada', year:2013}),
+    (WaltDisney)
+    (ChrisBuck)
+    (Ocho)
+    (Animacion)
+    (Aventura)
+    (Fantasia)
+    (Musical)
+
+
     (LaPrincesaElSapo: Movie {title: 'La princesa y el sapo', year:2009}),
+    (WaltDisney)
+    (RonClements)
+    (JohnMusker)
+    (Siete)
+    (Animacion)
+    (Fantasia)
+    (Musical)
+    (Comedia)
+    (Romance)
+
+
     (ToyStory: Movie {title: 'Toy Story 1', year:1995}),
+    (WaltDisney)
+    (Pixar)
+    (JohnLasseter)
+    (Ocho)
+    (TomH)
+    (Animacion)
+    (Comedia)
+
+
     (Zootopia: Movie {title: 'Zootopia', year:2016}),
+    (WaltDisney)
+    (ByronHoward)
+    (RichMoore)
+    (JaredBush)
+    (Ocho)
+    (Animacion)
+    (Accion)
+    (Comedia)
+    (Policiaco)
+
+
     (LosIncreibles: Movie {title: 'Los Increibles', year:2004}),
+    (WaltDisney)
+    (Pixar)
+    (BradBird)
+    (Ocho)
+    (Animacion)
+    (Aventura)
+    (Superheroes)
+    (Comedia)
+
+
     (Coco: Movie {title: 'Coco', year:2017}),
+    (WaltDisney)
+    (Pixar)
+    (LeeUnkrich)
+    (Ocho)
+    (Animacion)
+    (Comedia)
+    (Drama)
+    (Fantasia)
+    (Musical)
+
+
     (Walle: Movie {title: 'Wall-e', year:2008}),
+    (Pixar)
+    (WaltDisney)
+    (AndrewStanton)
+    (Ocho)
+    (Animacion)
+    (Comedia)
+    (CienciaFiccion)
+
+
     (LiloStitch: Movie {title: 'Lilo y Stitch', year:2002}),
+    (WaltDisney)
+    (DeanDeBlois)
+    (ChrisSanders)
+    (Siete)
+    (Animacion)
+    (Comedia)
+    (CienciaFiccion)
+    (Drama)
+    (Aventura)
+
+
     (Intensamente: Movie {title: 'Intensa-mente', year:2015}),
+    (WaltDisney)
+    (Pixar)
+    (PeteDocter)
+    (RonnieDelCarmen)
+    (Ocho)
+    (Animacion)
+    (Comedia)
+    (Drama)
+
+
     (SpiderManSpiderverse: Movie {title: 'Spider-Man: un nuevo universo', year:2018}),
+    (ColumbiaPictures)
+    (SonyPictures)
+    (Marvel)
+    (BobPersichetti)
+    (PeterRamsey)
+    (RodneyRothman)
+    (Nueve)
+    (Animacion)
+    (Accion)
+    (CienciaFiccion)
+    (Aventura)
+
 
     (Avengers: Movie {title: 'The Avengers', year:2012}),
+    (Marvel)
+    (Paramount)
+    (JossWedon)
+    (Ocho)
+    (Accion)
+    (CienciaFiccion)
+    (Aventura)
+    (Superheroes)
+    (RobertDowneyJr)
+    (ChrisEvans)
+    (MarkRuffalo)
+    (ChrisHemsworth)
+    (ScarlettJohansson)
+    (JeremyRenner)
+    (TomHiddleston)
+    (ClarkGregg)
+    (CobieSmulders)
+    (SamuelLJackson)
+
+
     (AvengersUltron: Movie {title: 'Avengers: Age of Ultron', year:2015}),
+    (Marvel)
+    (JossWedon)
+    (Siete)
+    (Accion)
+    (CienciaFiccion)
+    (Aventura)
+    (Superheroes)
+    (RobertDowneyJr)
+    (ChrisEvans)
+    (MarkRuffalo)
+    (ChrisHemsworth)
+    (ScarlettJohansson)
+    (JeremyRenner)
+    (ElizabethOlsen)
+    (CobieSmulders)
+    (SamuelLJackson)
+    (JamesSpader)
+
+
     (AvengersInfinityWar: Movie {title: 'Avengers: Infinity War', year:2018}),
+    (Marvel)
+    (AnthonyRusso)
+    (JoeRusso)
+    (Nueve)
+    (Accion)
+    (CienciaFiccion)
+    (Aventura)
+    (Superheroes)
+    (RobertDowneyJr)
+    (ChrisEvans)
+    (MarkRuffalo)
+    (ChrisHemsworth)
+    (ScarlettJohansson)
+    (JeremyRenner)
+    (ElizabethOlsen)
+    (TomHolland)
+    (PaulBettany)
+    (BenedictCumberbatch)
+    (ChadwickBoseman)
+    (SebastianStan)
+    (TomHiddleston)
+    (IdrisElba)
+    (BenedictWong)
+    (KarenGillan)
+    (DaveBautista)
+    (GwynethPaltrow)
+    (BenicioDelToro)
+    (JoshBrolin)
+    (ChrisPratt)
+
+
     (AvengersEndGame: Movie {title: 'Avengers: Endgame', year:2018}),
+    (Marvel)
+    (AnthonyRusso)
+    (JoeRusso)
+    (Nueve)
+    (Accion)
+    (CienciaFiccion)
+    (Aventura)
+    (Superheroes)
+    (RobertDowneyJr)
+    (ChrisEvans)
+    (MarkRuffalo)
+    (ChrisHemsworth)
+    (ScarlettJohansson)
+    (JeremyRenner)
+    (ElizabethOlsen)
+    (TomHolland)
+    (PaulBettany)
+    (BenedictCumberbatch)
+    (ChadwickBoseman)
+    (SebastianStan)
+    (TomHiddleston)
+    (IdrisElba)
+    (BenedictWong)
+    (BrieLarson)
+    (KarenGillan)
+    (DaveBautista)
+    (GwynethPaltrow)
+    (BenicioDelToro)
+    (JoshBrolin)
+    (ChrisPratt)
+    (PaulRudd)
+    (SamuelLJackson)
+
+
     (IronMan: Movie {title: 'Iron Man: el hombre de hierro', year:2008}),
+    (Marvel)
+    (JonFavreau)
+    (Ocho)
+    (Accion)
+    (CienciaFiccion)
+    (Superheroes)
+    (RobertDowneyJr)
+    (JonFavreau)
+    (GwynethPaltrow)
+    (PaulBettany)
+    (TerrenceHoward)
+
+
     (IronMan2: Movie {title: 'Iron Man 2', year:2010}),
+    (Marvel)
+    (Paramount)
+    (FairView)
+    (JonFavreau)
+    (Siete)
+    (Accion)
+    (CienciaFiccion)
+    (Superheroes)
+    (RobertDowneyJr)
+    (JonFavreau)
+    (GwynethPaltrow)
+    (PaulBettany)
+    (TerrenceHoward)
+    (SamuelLJackson)
+    (ClarkGregg)
+    (ScarlettJohansson)
+
+
     (IronMan3: Movie {title: 'Iron Man 3', year:2013}),
+    (Marvel)
+    (Paramount)
+    (DMGEntertainment)
+    (NobleMedia)
+    (JonFavreau)
+    (Siete)
+    (Accion)
+    (CienciaFiccion)
+    (Superheroes)
+    (RobertDowneyJr)
+    (JonFavreau)
+    (GwynethPaltrow)
+
+
     (CapitanAmerica1: Movie {title: 'Capitán America: The First Avenger', year:2011}),
+    (Marvel)
+    (JoeJohnston)
+    (Seis)
+    (Aventura)
+    (CienciaFiccion)
+    (Superheroes)
+    (Accion)
+    (Guerra)
+    (ChrisEvans)
+    (TommyLeeJones)
+    (HayleyAtwell)
+    (SebastianStan)
+    (NealMcDonough)
+
+
     (TheWinterSoldier: Movie {title: 'Capitán América: The Winter Soldier', year:2014}),
+    (Marvel)
+    (AnthonyRusso)
+    (JoeRusso)
+    (Ocho)
+    (Aventura)
+    (Accion)
+    (CienciaFiccion)
+    (Superheroes)
+    (ChrisEvans)
+    (ScarlettJohansson)
+    (SebastianStan)
+    (CobieSmulders)
+    (HayleyAtwell)
+    (SamuelLJackson)
+
+
     (CivilWar: Movie {title: 'Capitán América: Civil War', year:2016}),
+    (Marvel)
+    (AnthonyRusso)
+    (JoeRusso)
+    (Ocho)
+    (Accion)
+    (CienciaFiccion)
+    (Superheroes)
+    (ChrisEvans)
+    (RobertDowneyJr)
+    (ScarlettJohansson)
+    (SebastianStan)
+    (JeremyRenner)
+    (ChadwickBoseman)
+    (PaulBettany)
+    (ElizabethOlsen)
+    (PaulRudd)
+    (TomHolland)
+    (DanielBruhl)
+
+
     (Thor: Movie {title: 'Thor', year:2011}),
+    (Marvel)
+    (KennethBranagh)
+    (Siete)
+    (Accion)
+    (CienciaFiccion)
+    (Aventura)
+    (Fantasia)
+    (Epico)
+    (Superheroes)
+    (ChrisHemsworth)
+    (TomHiddleston)
+    (NataliePortman)
+    (AnthonyHopkins)
+    (ClarkGregg)
+    (IdrisElba)
+
+
     (Thor2: Movie {title: 'Thor: The Dark World', year:2013}),
+    (Marvel)
+    (AlanTaylor)
+    (Siete)
+    (Accion)
+    (Fantasia)
+    (CienciaFiccion)
+    (Epico)
+    (Aventura)
+    (Superheroes)
+    (ChrisHemsworth)
+    (TomHiddleston)
+    (NataliePortman)
+    (AnthonyHopkins)
+    (ClarkGregg)
+    (IdrisElba)
+
+
     (Thor3: Movie {title: 'Thor Ragnarok', year:2017}),
+    (Marvel)
+    (TaikaWaititi)
+    (Ocho)
+    (Accion)
+    (Aventura)
+    (Fantasia)
+    (CienciaFiccion)
+    (Superheroes)
+    (ChrisHemsworth)
+    (TomHiddleston)
+    (CateBlanchett)
+    (AnthonyHopkins)
+    (IdrisElba)
+    (MarkRuffalo)
+
+
     (SpiderMan: Movie {title: 'Spider-Man', year:2002}),
+    (Marvel)
+    (ColumbiaPictures)
+    (SamRaimi)
+    (Siete)
+    (Accion)
+    (CienciaFiccion)
+    (Drama)
+    (Superheroes)
+    (TobeyMaguire)
+    (WillemDafoe)
+    (KirstenDunst)
+    (JamesFranco)
+    (RosemaryHarris)
+    (CliffRobertson)
+    (ElzabethBanks)
+    (JoeManganiello)
+    (BillNunn)
+    (TedRaimi)
+
+
+
     (SpiderMan2: Movie {title: 'Spider-Man 2', year:2004}),
+    (Marvel)
+    (ColumbiaPictures)
+    (SamRaimi)
+    (Siete)
+    (Accion)
+    (CienciaFiccion)
+    (Drama)
+    (Superheroes)
+    (TobeyMaguire)
+    (AlfredMolina)
+    (KirstenDunst)
+    (JamesFranco)
+    (RosemaryHarris)
+    (DonnaMurphy)
+    (BillNunn)
+    (ElizabethBanks)
+    (TedRaimi)
+
+
     (SpiderMan3: Movie {title: 'Spider-Man 3', year:2007}),
+    (Marvel)
+    (ColumbiaPictures)
+    (SamRaimi)
+    (Seis)
+    (Accion)
+    (CienciaFiccion)
+    (Drama)
+    (Superheroes)
+    (TobeyMaguire)
+    (AlfredMolina)
+    (KirstenDunst)
+    (JamesFranco)
+    (RosemaryHarris)
+    (DonnaMurphy)
+    (BillNunn)
+    (ElizabethBanks)
+    (TedRaimi)
+
     (SpiderManHomecoming: Movie {title: 'Spider-Man: Homecoming', year:2017}),
+    (Marvel)
+    (ColumbiaPictures)
+    (PascalPictures)
+    (JonWatts)
+    (Ocho)
+    (Accion)
+    (Aventura)
+    (CienciaFiccion)
+    (Superheroes)
+    (TomHolland)
+    (JonFavreau)
+    (Zendaya)
+    (DonaldGlover)
+    (TyneDaly)
+    (MarisaTomei)
+    (RobertDowneyJr)
+
     (AntMan: Movie {title: 'Ant-Man: el Hombre Hormiga', year:2015}),
+    (Marvel)
+    (PeytonReed)
+    (Siete)
+    (Accion)
+    (Aventura)
+    (CienciaFiccion)
+    (Comedia)
+    (Superheroes)
+    (PaulRudd)
+    (EvangelineLilly)
+    (CoreyStoll)
+    (BobbyCannavale)
+    (MichaelPena)
+    (WoodHarris)
+    (MichaelDouglas)
+
     (AntManTheWasp: Movie {title: 'Ant-Man and the Wasp', year:2018}),
+    (Marvel)
+    (PeytonReed)
+    (Siete)
+    (Accion)
+    (CienciaFiccion)
+    (Aventura)
+    (Superheroes)
+    (PaulRudd)
+    (EvangelineLilly)
+    (MichaelPena)
+    (MichaelDouglas)
+    (BobbyCannavale)
+
     (DoctorStrange: Movie {title: 'Doctor Strange: hechicero supremo', year:2016}),
+    (Marvel)
+    (ScottDerrickson)
+    (Ocho)
+    (Accion)
+    (Fantasia)
+    (Aventura)
+    (Superheroes)
+    (BenedictCumberbatch)
+    (BenedictWong)
+    (ChiwetelEjiofor)
+    (RachelMcAdams)
+
     (BlackPanther: Movie {title: 'Black Panther', year:2018}),
+    (Marvel)
+    (RyanCoogler)
+    (Siete)
+    (Accion)
+    (Aventura)
+    (CienciaFiccion)
+    (Superheroes)
+    (ChadwickBoseman)
+    (MihaelBJordan)
+    (LupitaNyongo)
+    (DanaiGurira)
+    (MartinFreeman)
+
     (CapitanaMarvel: Movie {title: 'Capitana Marvel', year:2019}),
+    (Marvel)
+    (RyanFleck)
+    (AnnaBoden)
+    (Siete)
+    (Accion)
+    (CienciaFiccion)
+    (Acentura)
+    (Superheroes)
+    (BrieLarson)
+    (SamuelLJackson)
+    (ClarkGregg)
+
     (GuardianesGalaxia: Movie {title: 'Guardianes de la Galaxia', year:2014}),
+    (Marvel)
+    (JamesGunn)
+    (Ocho)
+    (Accion)
+    (Comedia)
+    (CienciaFiccion)
+    (Aventura)
+    (Superheroes)
+    (ChrisPratt)
+    (DaveBautista)
+    (VinDiesel)
+    (BradleyCooper)
+    (LeePace)
+    (MichaelRooker)
+    (BenicioDelToro)
+
     (GuardianesGalaxia2: Movie {title: 'Guardianes de la Galaxia Vol. 2', year:2017}),
+    (Marvel)
+    (JamesGunn)
+    (Ocho)
+    (Accion)
+    (Aventura)
+    (Comedia)
+    (CienciaFiccion)
+    (Superheroes)
+    (ChrisPratt)
+    (DaveBautista)
+    (VinDiesel)
+    (BradleyCooper)
+    (LeePace)
+    (MichaelRooker)
+    (BenicioDelToro)
 
     (ElHombreDeAcero: Movie {title: 'El Hombre de Acero', year:2013}),
     (Aquaman: Movie {title: 'Aquaman', year:2018}),
     (WonderWoman: Movie {title: 'Wonder Woman', year:2017}),
+
+    
     (WhatIf: Movie {title: 'What If', year:2013}),
     (BajoEstrella: Movie {title: 'Bajo la misma estrella', year:2014}),
     (TresMetrosCielo: Movie {title: 'Tres metros sobre el cielo', year:2010}),
