@@ -21,147 +21,148 @@
 
 
 // Movies
-CREATE (TopGun: Movie {title: "Top Gun", year:1986}),
+CREATE
+    (TopGun: Movie {title: "Top Gun", year:1986}),
     (KellyM: Person {name: 'Kelly McGillis'}),
     (TomC: Person {name: 'Tom Cruise'}),
     (ValK: Person {name: 'Val Kilmer'}),
     (TonyS: Person {name: 'Tony Scott'}),
-
     (TomC) -[:ACTED_IN]-> (TopGun),
     (KellyM) -[:ACTED_IN]-> (TopGun),
     (ValK) -[:ACTED_IN]-> (TopGun),
-    (TonyS) -[:DIRECTED]-> (TopGun);
+    (TonyS) -[:DIRECTED]-> (TopGun),
 
 
-CREATE (Apollo13: Movie {title: 'Apollo 13', year:1995}),
+    (Apollo13: Movie {title: 'Apollo 13', year:1995}),
     (EdH: Person {name: 'Ed Harris'}),
     (BillPax: Person {name: 'Bill Paxton'}),
     (TomH: Person {name: 'Tom Hanks'}),
     (RonH: Person {name: 'Ron H'}),
-
     (TomH) -[:ACTED_IN]-> (Apollo13),
     (EdH) -[:ACTED_IN]-> (Apollo13),
     (BillPax) -[:ACTED_IN]-> (Apollo13),
-    (RonH) -[:DIRECTED]-> (Apollo13);
+    (RonH) -[:DIRECTED]-> (Apollo13),
+
+
+    (Up: Movie {title: 'Up : una aventura de altura', year:2009}),
+    (Enredados: Movie {title: 'Enredados', year:2010}),
+    (Frozen: Movie {title: 'Frozen: una aventura congelada', year:2013}),
+    (LaPrincesaElSapo: Movie {title: 'La princesa y el sapo', year:2009}),
+    (ToyStory: Movie {title: 'Toy Story 1', year:1995}),
+    (Zootopia: Movie {title: 'Zootopia', year:2016}),
+    (LosIncreibles: Movie {title: 'Los Increibles', year:2004}),
+    (Coco: Movie {title: 'Coco', year:2017}),
+    (Walle: Movie {title: 'Wall-e', year:2008}),
+    (LiloStitch: Movie {title: 'Lilo y Stitch', year:2002}),
+    (Intensamente: Movie {title: 'Intensa-mente', year:2015}),
+    (SpiderManSpiderverse: Movie {title: 'Spider-Man: un nuevo universo', year:2018}),
+
+    (Avengers: Movie {title: 'The Avengers', year:2012}),
+    (AvengersUltron: Movie {title: 'Avengers: Age of Ultron', year:2015}),
+    (AvengersInfinityWar: Movie {title: 'Avengers: Infinity War', year:2018}),
+    (AvengersEndGame: Movie {title: 'Avengers: Endgame', year:2018}),
+    (IronMan: Movie {title: 'Iron Man: el hombre de hierro', year:2008}),
+    (IronMan2: Movie {title: 'Iron Man 2', year:2010}),
+    (IronMan3: Movie {title: 'Iron Man 3', year:2013}),
+    (CapitanAmerica1: Movie {title: 'Capitán America: The First Avenger', year:2011}),
+    (TheWinterSoldier: Movie {title: 'Capitán América: The Winter Soldier', year:2014}),
+    (CivilWar: Movie {title: 'Capitán América: Civil War', year:2016}),
+    (Thor: Movie {title: 'Thor', year:2011}),
+    (Thor2: Movie {title: 'Thor: The Dark World', year:2013}),
+    (Thor3: Movie {title: 'Thor Ragnarok', year:2017}),
+    (SpiderMan: Movie {title: 'Spider-Man', year:2002}),
+    (SpiderMan2: Movie {title: 'Spider-Man 2', year:2004}),
+    (SpiderMan3: Movie {title: 'Spider-Man 3', year:2007}),
+    (SpiderManHomecoming: Movie {title: 'Spider-Man: Homecoming', year:2017}),
+    (AntMan: Movie {title: 'Ant-Man: el Hombre Hormiga', year:2015}),
+    (AntManTheWasp: Movie {title: 'Ant-Man and the Wasp', year:2018}),
+    (DoctorStrange: Movie {title: 'Doctor Strange: hechicero supremo', year:2016}),
+    (BlackPanther: Movie {title: 'Black Panther', year:2018}),
+    (CapitanaMarvel: Movie {title: 'Capitana Marvel', year:2019}),
+    (GuardianesGalaxia: Movie {title: 'Guardianes de la Galaxia', year:2014}),
+    (GuardianesGalaxia2: Movie {title: 'Guardianes de la Galaxia Vol. 2', year:2017}),
+
+    (ElHombreDeAcero: Movie {title: 'El Hombre de Acero', year:2013}),
+    (Aquaman: Movie {title: 'Aquaman', year:2018}),
+    (WonderWoman: Movie {title: 'Wonder Woman', year:2017}),
+    (WhatIf: Movie {title: 'What If', year:2013}),
+    (BajoEstrella: Movie {title: 'Bajo la misma estrella', year:2014}),
+    (TresMetrosCielo: Movie {title: 'Tres metros sobre el cielo', year:2010}),
+    (ADosMetrosDeTi: Movie {title: 'A dos metros de ti', year:2019}),
+    (NoAceptanDevoluciones: Movie {title: 'No se aceptan devoluciones', year:2013}),
+    (PosdataTeAmo: Movie {title: 'Posdata, te amo', year:2007}),
+    (GrandesHeroes: Movie {title: 'Grandes Héroes', year:2014}),
+    (LeapYear: Movie {title: 'Leap Year', year:2010}),
+    (Flipped: Movie {title: 'Flipped', year:2010}),
+    (LosIlusionistas: Movie {title: 'Los Ilusionistas: nada es lo que parece', year:2013}),
+    (GhostInShell: Movie {title: 'Ghost in the Shell: vigilante del futuro', year:2017}),
+    (BladeRunner2049: Movie {title: 'Blade Runner 2049', year:2017}),
+    (StarWarsEpisodio3: Movie {title: 'Star Wars: episodio III - La Venganza de los Sith', year:2005}),
+    (TheHungerGames: Movie {title: 'The Hunger Games', year:2012}),
+    (LaPropuesta: Movie {title: 'La Propuesta', year:2009}),
+    (ElConjuro: Movie {title: 'El Conjuro', year:2013}),
+    (JuegoDeGemelas: Movie {title: 'Juego de Gemelas', year:1998}),
+    (ElTitere: Movie {title: 'El títere', year:2007}),
+    (LaMonja: Movie {title: 'La Monja', year:2018}),
+    (ForrestGump: Movie {title: 'Forrest Gump', year:1994}),
+    (Blackjack21: Movie {title: '21 Blackjack', year:2008}),
+    (Transformers: Movie {title: 'Transformers', year:2007}),
+    (Gravity: Movie {title: 'Gravity', year:2013}),
+    (LaQuintaOla: Movie {title: 'La Quinta Ola', year:2016}),
+    (Taken: Movie {title: 'Taken', year:2008}),
+    (AboutTime: Movie {title: 'About Time', year:2013}),
+    (TheIntern: Movie {title: 'The Intern', year:2015}),
+    (TheDayAfterTomorrow: Movie {title: 'The Day After Tomorrow', year:2004}),
+    (Interstellar: Movie {title: 'Interstellar', year:2014}),
+    (HarryPotterMisterioPrincipe: Movie {title: 'Harry Potter y el Misterio del Principe', year:2009}),
+    (HarryPotterPrisionerAzkaban: Movie {title: 'Harry Potter and The Prisioner of Azkaban', year:2004}),
+    (BackFuture3: Movie {title: 'Back to the future 3', year:1990}),
+    (SherlockHolmesJuegoSombras: Movie {title: 'Sherlock Holmes Juego de Sombras', year:2011}),
+    (GrownUps: Movie {title: 'Grown ups', year:2010}),
+    (TheBreakfastClub: Movie {title: 'The Breakfast Club', year:1985}),
+    (LoveRosie: Movie {title: 'Love, Rosie', year:2014}),
+    (BenvenutiAlSud: Movie {title: 'Benvenuti al Sud', year:2010}),
+    (Inception: Movie {title: 'Inception', year:2010}),
+    (StepUp3: Movie {title: 'Step Up 3', year:2010}),
+    (Argo: Movie {title: 'Argo', year:2012}),
+    (LaVidaEsBella: Movie {title: 'La vida es bella', year:1997}),
+    (AGoodYear: Movie {title: 'A Good Year', year:2006}),
+    (LoMejorDeMiVida: Movie {title: 'Lo mejor de mi vida', year:2015}),
+    (ScentOfWoman: Movie {title: 'Scent Of A Woman', year:1992}),
+    (Hobbit1: Movie {title: 'El hobbit: un viaje inesperado', year:2012}),
+    (Hobbit2: Movie {title: 'El hobbit: la desolación de Smaug', year:2013}),
+    (Hobbit3: Movie {title: 'El Hobbit: la batalla de los cinco ejércitos', year:2014}),
+    (ElConjuro2: Movie {title: 'El Conjuro 2', year:2016}),
+    (ElSeñorAnillos: Movie {title: 'El Señor de los Anillos: la Comunidad del Anillo', year:2001}),
 
 
 
-CREATE (Up: Movie {title: 'Up : una aventura de altura', year:2009});
-CREATE (Enredados: Movie {title: 'Enredados', year:2010});
-CREATE (Frozen: Movie {title: 'Frozen: una aventura congelada', year:2013});
-CREATE (LaPrincesaElSapo: Movie {title: 'La princesa y el sapo', year:2009});
-CREATE (ToyStory: Movie {title: 'Toy Story 1', year:1995});
-CREATE (Zootopia: Movie {title: 'Zootopia', year:2016});
-CREATE (LosIncreibles: Movie {title: 'Los Increibles', year:2004});
-CREATE (Coco: Movie {title: 'Coco', year:2017});
-CREATE (Walle: Movie {title: 'Wall-e', year:2008});
-CREATE (LiloStitch: Movie {title: 'Lilo y Stitch', year:2002});
-CREATE (Intensamente: Movie {title: 'Intensa-mente', year:2015});
-CREATE (SpiderManSpiderverse: Movie {title: 'Spider-Man: un nuevo universo', year:2018});
-
-CREATE (Avengers1: Movie {title: 'The Avengers', year:2012});
-CREATE (AvengersUltron: Movie {title: 'Avengers: Age of Ultron', year:2015});
-CREATE (AvengersInfinityWar: Movie {title: 'Avengers: Infinity War', year:2018});
-CREATE (AvengersEndGame: Movie {title: 'Avengers: Endgame', year:2018});
-CREATE (IronMan: Movie {title: 'Iron Man: el hombre de hierro', year:2008});
-CREATE (IronMan2: Movie {title: 'Iron Man 2', year:2010});
-CREATE (IronMan3: Movie {title: 'Iron Man 3', year:2013});
-CREATE (CapitanAmerica1: Movie {title: 'Capitán America: The First Avenger', year:2011});
-CREATE (TheWinterSoldier: Movie {title: 'Capitán América: The Winter Soldier', year:2014});
-CREATE (CivilWar: Movie {title: 'Capitán América: Civil War', year:2016});
-CREATE (Thor: Movie {title: 'Thor', year:2011});
-CREATE (Thor2: Movie {title: 'Thor: The Dark World', year:2013});
-CREATE (Thor3: Movie {title: 'Thor Ragnarok', year:2017});
-CREATE (SpiderMan: Movie {title: 'Spider-Man', year:2002});
-CREATE (SpiderMan2: Movie {title: 'Spider-Man 2', year:2004});
-CREATE (SpiderMan3: Movie {title: 'Spider-Man 3', year:2007});
-CREATE (SpiderManHomecoming: Movie {title: 'Spider-Man: Homecoming', year:2017});
-CREATE (AntMan: Movie {title: 'Ant-Man: el Hombre Hormiga', year:2015});
-CREATE (AntManTheWasp: Movie {title: 'Ant-Man and the Wasp', year:2018});
-CREATE (DoctorStrange: Movie {title: 'Doctor Strange: hechicero supremo', year:2016});
-CREATE (BlackPanther: Movie {title: 'Black Panther', year:2018});
-CREATE (CapitanaMarvel: Movie {title: 'Capitana Marvel', year:2019});
-CREATE (GuardianesGalaxia: Movie {title: 'Guardianes de la Galaxia', year:2014});
-CREATE (GuardianesGalaxia2: Movie {title: 'Guardianes de la Galaxia Vol. 2', year:2017});
-
-CREATE (ElHombreDeAcero: Movie {title: 'El Hombre de Acero', year:2013});
-CREATE (Aquaman: Movie {title: 'Aquaman', year:2018});
-CREATE (WonderWoman: Movie {title: 'Wonder Woman', year:2017});
-CREATE (WhatIf: Movie {title: 'What If', year:2013});
-CREATE (BajoEstrella: Movie {title: 'Bajo la misma estrella', year:2014});
-CREATE (TresMetrosCielo: Movie {title: 'Tres metros sobre el cielo', year:2010});
-CREATE (ADosMetrosDeTi: Movie {title: 'A dos metros de ti', year:2019});
-CREATE (NoAceptanDevoluciones: Movie {title: 'No se aceptan devoluciones', year:2013});
-CREATE (PosdataTeAmo: Movie {title: 'Posdata, te amo', year:2007});
-CREATE (GrandesHeroes: Movie {title: 'Grandes Héroes', year:2014});
-CREATE (LeapYear: Movie {title: 'Leap Year', year:2010});
-CREATE (Flipped: Movie {title: 'Flipped', year:2010});
-CREATE (LosIlusionistas: Movie {title: 'Los Ilusionistas: nada es lo que parece', year:2013});
-CREATE (GhostInShell: Movie {title: 'Ghost in the Shell: vigilante del futuro', year:2017});
-CREATE (BladeRunner2049: Movie {title: 'Blade Runner 2049', year:2017});
-CREATE (StarWarsEpisodio3: Movie {title: 'Star Wars: episodio III - La Venganza de los Sith', year:2005});
-CREATE (TheHungerGames: Movie {title: 'The Hunger Games', year:2012});
-CREATE (LaPropuesta: Movie {title: 'La Propuesta', year:2009});
-CREATE (ElConjuro: Movie {title: 'El Conjuro', year:2013});
-CREATE (JuegoDeGemelas: Movie {title: 'Juego de Gemelas', year:1998});
-CREATE (ElTitere: Movie {title: 'El títere', year:2007});
-CREATE (LaMonja: Movie {title: 'La Monja', year:2018});
-CREATE (ForrestGump: Movie {title: 'Forrest Gump', year:1994});
-CREATE (21Blackjack: Movie {title: '21 Blackjack', year:2008});
-CREATE (Transformers: Movie {title: 'Transformers', year:2007});
-CREATE (Gravity: Movie {title: 'Gravity', year:2013});
-CREATE (LaQuintaOla: Movie {title: 'La Quinta Ola', year:2016});
-CREATE (Taken: Movie {title: 'Taken', year:2008});
-CREATE (AboutTime: Movie {title: 'About Time', year:2013});
-CREATE (TheIntern: Movie {title: 'The Intern', year:2015});
-CREATE (TheDayAfterTomorrow: Movie {title: 'The Day After Tomorrow', year:2004});
-CREATE (Interstellar: Movie {title: 'Interstellar', year:2014});
-CREATE (HarryPotterMisterioPrincipe: Movie {title: 'Harry Potter y el Misterio del Principe', year:2009});
-CREATE (HarryPotterPrisionerAzkaban: Movie {title: 'Harry Potter and The Prisioner of Azkaban', year:2004});
-CREATE (BackFuture3: Movie {title: 'Back to the future 3', year:1990});
-CREATE (SherlockHolmesJuegoSombras: Movie {title: 'Sherlock Holmes Juego de Sombras', year:2011});
-CREATE (GrownUps: Movie {title: 'Grown ups', year:2010});
-CREATE (TheBreakfastClub: Movie {title: 'The Breakfast Club', year:1985});
-CREATE (LoveRosie: Movie {title: 'Love, Rosie', year:2014});
-CREATE (BenvenutiAlSud: Movie {title: 'Benvenuti al Sud', year:2010});
-CREATE (Inception: Movie {title: 'Inception', year:2010});
-CREATE (StepUp3: Movie {title: 'Step Up 3', year:2010});
-CREATE (Argo: Movie {title: 'Argo', year:2012});
-CREATE (LaVidaEsBella: Movie {title: 'La vida es bella', year:1997});
-CREATE (AGoodYear: Movie {title: 'A Good Year', year:2006});
-CREATE (LoMejorDeMiVida: Movie {title: 'Lo mejor de mi vida', year:2015});
-CREATE (ScentOfWoman: Movie {title: 'Scent Of A Woman', year:1992});
-CREATE (Hobbit1: Movie {title: 'El hobbit: un viaje inesperado', year:2012});
-CREATE (Hobbit2: Movie {title: 'El hobbit: la desolación de Smaug', year:2013});
-CREATE (Hobbit3: Movie {title: 'El Hobbit: la batalla de los cinco ejércitos', year:2014});
-CREATE (ElConjuro2: Movie {title: 'El Conjuro 2', year:2016});
-CREATE (ElSeñorAnillos: Movie {title: 'El Señor de los Anillos: la Comunidad del Anillo', year:2001});
 
 // Users
-CREATE
-    (JuliadeLeon: Person {name: 'Julia de León'}),
-    (PaolaAlvarez: Person {name: 'Paola Álvarez'}),
-    (JohannaMorales: Person {name: 'Johanna Morales'}),
-    (AndresLopez: Person {name: 'Andrés López'}),
-    (AndyCastillo: Person {name: 'Andy Castillo'}),
-    (AbrilPalencia: Person {name: 'Abril Palencia'}),
-    (LuisPerezAju: Person {name: 'Luis Pérez Ajú'}),
-    (MarcoFuentes: Person {name: 'Marco Fuentes'}),
-    (CamilaGonzalez: Person {name: 'Camila González'}),
-    (LuisPedroValenzuela: Person {name: 'Luis Pedro Valenzuela'}),
-    (ManuelMiranda: Person {name: 'Manuel Miranda'}),
-    (AlfredoTrigueros: Person {name: 'Alfredo Trigueros'}),
-    (MarianaRivera: Person {name: 'Mariana Rivera'}),
-    (LucaRB: Person {name: 'Luca RB'}),
-    (RobertoDiaz: Person {name: 'Roberto Diaz'}),
-    (AnaOrtega: Person {name: 'Ana Ortega'}),
-    (FranciscoRosal: Person {name: 'Francisco Rosal'}),
-    (JoseRobertoTucubal: Person {name: 'José Roberto Tucubal'}),
-    (JavierCastaneda: Person {name: 'Javier Castañeda'}),
-    (Fernando: Person {name: 'Fernando'});
+    (JuliadeLeon: User {name: 'Julia de León'}),
+    (PaolaAlvarez: User {name: 'Paola Álvarez'}),
+    (JohannaMorales: User {name: 'Johanna Morales'}),
+    (AndresLopez: User {name: 'Andrés López'}),
+    (AndyCastillo: User {name: 'Andy Castillo'}),
+    (AbrilPalencia: User {name: 'Abril Palencia'}),
+    (LuisPerezAju: User {name: 'Luis Pérez Ajú'}),
+    (MarcoFuentes: User {name: 'Marco Fuentes'}),
+    (CamilaGonzalez: User {name: 'Camila González'}),
+    (LuisPedroValenzuela: User {name: 'Luis Pedro Valenzuela'}),
+    (ManuelMiranda: User {name: 'Manuel Miranda'}),
+    (AlfredoTrigueros: User {name: 'Alfredo Trigueros'}),
+    (MarianaRivera: User {name: 'Mariana Rivera'}),
+    (LucaRB: User {name: 'Luca RB'}),
+    (RobertoDiaz: User {name: 'Roberto Diaz'}),
+    (AnaOrtega: User {name: 'Ana Ortega'}),
+    (FranciscoRosal: User {name: 'Francisco Rosal'}),
+    (JoseRobertoTucubal: User {name: 'José Roberto Tucubal'}),
+    (JavierCastaneda: User {name: 'Javier Castañeda'}),
+    (Fernando: User {name: 'Fernando'}),
+
+
 
 // Users Likes
-CREATE
     //Fernando
     (Fernando) -[:LIKED]-> (ElSeñorAnillos),
     (Fernando) -[:LIKED]-> (AvengersEndGame),
@@ -186,7 +187,7 @@ CREATE
     (FranciscoRosal) -[:LIKED]-> (LoMejorDeMiVida),
     (FranciscoRosal) -[:LIKED]-> (ScentOfWoman),
     (FranciscoRosal) -[:LIKED]-> (NoAceptanDevoluciones),
-    (FranciscoRosal) -[:LIKED]-> (21Blackjack),
+    (FranciscoRosal) -[:LIKED]-> (Blackjack21),
     (FranciscoRosal) -[:LIKED]-> (AvengersEndGame),
     (FranciscoRosal) -[:LIKED]-> (Interstellar),
     (FranciscoRosal) -[:LIKED]-> (ForrestGump),
@@ -244,7 +245,7 @@ CREATE
     (MarcoFuentes) -[:LIKED]-> (CapitanAmerica1),
     (MarcoFuentes) -[:LIKED]-> (ForrestGump),
     (MarcoFuentes) -[:LIKED]-> (LiloStitch),
-    (MarcoFuentes) -[:LIKED]-> (21Blackjack),
+    (MarcoFuentes) -[:LIKED]-> (Blackjack21),
     (MarcoFuentes) -[:LIKED]-> (Aquaman),
     //LuisPerezAju
     (LuisPerezAju) -[:LIKED]-> (SpiderManSpiderverse),
@@ -331,5 +332,5 @@ CREATE
 //DELETE n
 
 // Borra todo
-//MATCH (n)
-//DETACH DELETE n
+// MATCH (n)
+// DETACH DELETE n
