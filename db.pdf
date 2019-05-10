@@ -41,6 +41,8 @@ CREATE
     (Thriller: Genre {name: 'Thriller'}),
     (Superheroes: Genre {name: 'Superheroes'}),
     (Guerra: Genre {name: 'Guerra'}),
+
+
     //Calificacion
     (Una: Calificacion {name: 'Una Estrella'}),
     (Dos: Calificacion {name: 'Dos Estrellas'}),
@@ -57,6 +59,8 @@ CREATE
     (Paramount: Productor {name: 'Paramount Pictures'}),
 
 
+//---------------------------------------------------------------------------
+//Movies
     (TopGun: Movie {title: "Top Gun", year:1986}),
     (KellyM: Person {name: 'Kelly McGillis'}),
     (TomC: Person {name: 'Tom Cruise'}),
@@ -64,9 +68,9 @@ CREATE
     (TonyS: Person {name: 'Tony Scott'}),
     (Paramount) -[:PRODUCED]-> (TopGun),
     (TonyS) -[:DIRECTED]-> (TopGun),
-    (Siete)
-    (Accion)
-    (Drama)
+    (Siete) -[:RATED]-> (TopGun),
+    (TopGun) -[:IN_GENRE]-> (Accion),
+    (TopGun) -[:IN_GENRE]-> (Drama),
     (TomC) -[:ACTED_IN]-> (TopGun),
     (KellyM) -[:ACTED_IN]-> (TopGun),
     (ValK) -[:ACTED_IN]-> (TopGun),
@@ -77,184 +81,184 @@ CREATE
     (BillPax: Person {name: 'Bill Paxton'}),
     (TomH: Person {name: 'Tom Hanks'}),
     (RonH: Person {name: 'Ron Howard'}),
-    (ImagineEntertainment)
+    (ImagineEntertainment) -[:PRODUCED]-> (Apollo13),
     (RonH) -[:DIRECTED]-> (Apollo13),
-    (Ocho)
-    (Drama)
-    (Aventura)
-    (Historico)
+    (Ocho) -[:RATED]-> (Apollo13),
+    (Apollo13) -[:IN_GENRE]-> (Drama),
+    (Apollo13) -[:IN_GENRE]-> (Aventura),
+    (Apollo13) -[:IN_GENRE]-> (Historico),
     (TomH) -[:ACTED_IN]-> (Apollo13),
     (EdH) -[:ACTED_IN]-> (Apollo13),
     (BillPax) -[:ACTED_IN]-> (Apollo13),
 
 
     (Up: Movie {title: 'Up : una aventura de altura', year:2009}),
-    (Pixar)
-    (PeteDocter)
-    (BobPeterson)
-    (Ocho)
-    (Animacion)
-    (Aventura)
-    (Comedia)
+    (Pixar) -[:PRODUCED]-> (Up),
+    (PeteDocter) -[:DIRECTED]-> (Up),
+    (BobPeterson) -[:DIRECTED]-> (Up),
+    (Ocho) -[:RATED]-> (Up),
+    (Up) -[:IN_GENRE]-> (Animacion),
+    (Up) -[:IN_GENRE]-> (Aventura),
+    (Up) -[:IN_GENRE]-> (Comedia),
 
 
     (Enredados: Movie {title: 'Enredados', year:2010}),
-    (WaltDisney)
-    (ByronHowward)
-    (NathanGreno)
-    (Ocho)
-    (Animacion)
-    (Fantasia)
-    (Romantico)
-    (Comedia)
-    (Aventura)
-    (Musical)
+    (WaltDisney) -[:PRODUCED]-> (Enredados),
+    (ByronHowward) -[:DIRECTED]-> (Enredados),
+    (NathanGreno) -[:DIRECTED]-> (Enredados),
+    (Ocho) -[:RATED]-> (Enredados),
+    (Enredados) -[:IN_GENRE]-> (Animacion),
+    (Enredados) -[:IN_GENRE]-> (Fantasia),
+    (Enredados) -[:IN_GENRE]-> (Romantico),
+    (Enredados) -[:IN_GENRE]-> (Comedia),
+    (Enredados) -[:IN_GENRE]-> (Aventura),
+    (Enredados) -[:IN_GENRE]-> (Musical),
 
 
     (Frozen: Movie {title: 'Frozen: una aventura congelada', year:2013}),
-    (WaltDisney)
-    (ChrisBuck)
-    (Ocho)
-    (Animacion)
-    (Aventura)
-    (Fantasia)
-    (Musical)
+    (WaltDisney) -[:PRODUCED]-> (Frozen),
+    (ChrisBuck) -[:DIRECTED]-> (Frozen),
+    (Ocho) -[:RATED]-> (Frozen),
+    (Frozen) -[:IN_GENRE]-> (Animacion),
+    (Frozen) -[:IN_GENRE]-> (Aventura),
+    (Frozen) -[:IN_GENRE]-> (Fantasia),
+    (Frozen) -[:IN_GENRE]-> (Musical),
 
 
     (LaPrincesaElSapo: Movie {title: 'La princesa y el sapo', year:2009}),
-    (WaltDisney)
-    (RonClements)
-    (JohnMusker)
-    (Siete)
-    (Animacion)
-    (Fantasia)
-    (Musical)
-    (Comedia)
-    (Romance)
+    (WaltDisney) -[:PRODUCED]-> (LaPrincesaElSapo),
+    (RonClements) -[:DIRECTED]-> (LaPrincesaElSapo),
+    (JohnMusker) -[:DIRECTED]-> (LaPrincesaElSapo),
+    (Siete) -[:RATED]-> (LaPrincesaElSapo),
+    (LaPrincesaElSapo) -[:IN_GENRE]-> (Animacion),
+    (LaPrincesaElSapo) -[:IN_GENRE]-> (Fantasia),
+    (LaPrincesaElSapo) -[:IN_GENRE]-> (Musical),
+    (LaPrincesaElSapo) -[:IN_GENRE]-> (Comedia),
+    (LaPrincesaElSapo) -[:IN_GENRE]-> (Romance),
 
 
     (ToyStory: Movie {title: 'Toy Story 1', year:1995}),
-    (WaltDisney)
-    (Pixar)
-    (JohnLasseter)
-    (Ocho)
-    (TomH)
-    (Animacion)
-    (Comedia)
+    (WaltDisney) -[:PRODUCED]-> (ToyStory),
+    (Pixar) -[:PRODUCED]-> (ToyStory),
+    (JohnLasseter) -[:DIRECTED]-> (ToyStory),
+    (Ocho) -[:RATED]-> (ToyStory),
+    (ToyStory) -[:IN_GENRE]-> (Animacion),
+    (ToyStory) -[:IN_GENRE]-> (Comedia),
+    (TomH) -[:ACTED_IN]-> (ToyStory),
 
 
     (Zootopia: Movie {title: 'Zootopia', year:2016}),
-    (WaltDisney)
-    (ByronHoward)
-    (RichMoore)
-    (JaredBush)
-    (Ocho)
-    (Animacion)
-    (Accion)
-    (Comedia)
-    (Policiaco)
+    (WaltDisney) -[:PRODUCED]-> (Zootopia),
+    (ByronHoward) -[:DIRECTED]-> (Zootopia),
+    (RichMoore) -[:DIRECTED]-> (Zootopia),
+    (JaredBush) -[:DIRECTED]-> (Zootopia),
+    (Ocho) -[:RATED]-> (Zootopia),
+    (Zootopia) -[:IN_GENRE]-> (Animacion),
+    (Zootopia) -[:IN_GENRE]-> (Accion),
+    (Zootopia) -[:IN_GENRE]-> (Comedia),
+    (Zootopia) -[:IN_GENRE]-> (Policiaco),
 
 
     (LosIncreibles: Movie {title: 'Los Increibles', year:2004}),
-    (WaltDisney)
-    (Pixar)
-    (BradBird)
-    (Ocho)
-    (Animacion)
-    (Aventura)
-    (Superheroes)
-    (Comedia)
+    (WaltDisney) -[:PRODUCED]-> (LosIncreibles),
+    (Pixar) -[:PRODUCED]-> (LosIncreibles),
+    (BradBird) -[:DIRECTED]-> (LosIncreibles),
+    (Ocho) -[:RATED]-> (LosIncreibles),
+    (LosIncreibles) -[:IN_GENRE]-> (Animacion),
+    (LosIncreibles) -[:IN_GENRE]-> (Aventura),
+    (LosIncreibles) -[:IN_GENRE]-> (Superheroes),
+    (LosIncreibles) -[:IN_GENRE]-> (Comedia),
 
 
     (Coco: Movie {title: 'Coco', year:2017}),
-    (WaltDisney)
-    (Pixar)
-    (LeeUnkrich)
-    (Ocho)
-    (Animacion)
-    (Comedia)
-    (Drama)
-    (Fantasia)
-    (Musical)
+    (WaltDisney) -[:PRODUCED]-> (Coco),
+    (Pixar) -[:PRODUCED]-> (Coco),
+    (LeeUnkrich) -[:DIRECTED]-> (Coco),
+    (Ocho) -[:RATED]-> (Coco),
+    (Coco) -[:IN_GENRE]-> (Animacion),
+    (Coco) -[:IN_GENRE]-> (Comedia),
+    (Coco) -[:IN_GENRE]-> (Drama),
+    (Coco) -[:IN_GENRE]-> (Fantasia),
+    (Coco) -[:IN_GENRE]-> (Musical),
 
 
     (Walle: Movie {title: 'Wall-e', year:2008}),
-    (Pixar)
-    (WaltDisney)
-    (AndrewStanton)
-    (Ocho)
-    (Animacion)
-    (Comedia)
-    (CienciaFiccion)
+    (Pixar) -[:PRODUCED]-> (Walle),
+    (WaltDisney) -[:PRODUCED]-> (Walle),
+    (AndrewStanton) -[:DIRECTED]-> (Walle),
+    (Ocho) -[:RATED]-> (Walle),
+    (Walle) -[:IN_GENRE]-> (Animacion),
+    (Walle) -[:IN_GENRE]-> (Comedia),
+    (Walle) -[:IN_GENRE]-> (CienciaFiccion),
 
 
     (LiloStitch: Movie {title: 'Lilo y Stitch', year:2002}),
-    (WaltDisney)
-    (DeanDeBlois)
-    (ChrisSanders)
-    (Siete)
-    (Animacion)
-    (Comedia)
-    (CienciaFiccion)
-    (Drama)
-    (Aventura)
+    (WaltDisney) -[:PRODUCED]-> (LiloStitch),
+    (DeanDeBlois) -[:DIRECTED]-> (LiloStitch),
+    (ChrisSanders) -[:DIRECTED]-> (LiloStitch),
+    (Siete) -[:RATED]-> (LiloStitch),
+    (LiloStitch) -[:IN_GENRE]-> (Animacion),
+    (LiloStitch) -[:IN_GENRE]-> (Comedia),
+    (LiloStitch) -[:IN_GENRE]-> (CienciaFiccion),
+    (LiloStitch) -[:IN_GENRE]-> (Drama),
+    (LiloStitch) -[:IN_GENRE]-> (Aventura),
 
 
     (Intensamente: Movie {title: 'Intensa-mente', year:2015}),
-    (WaltDisney)
-    (Pixar)
-    (PeteDocter)
-    (RonnieDelCarmen)
-    (Ocho)
-    (Animacion)
-    (Comedia)
-    (Drama)
+    (WaltDisney) -[:PRODUCED]-> (Intensamente),
+    (Pixar) -[:PRODUCED]-> (Intensamente),
+    (PeteDocter) -[:DIRECTED]-> (Intensamente),
+    (RonnieDelCarmen) -[:DIRECTED]-> (Intensamente),
+    (Ocho) -[:RATED]-> (Intensamente),
+    (Intensamente) -[:IN_GENRE]-> (Animacion),
+    (Intensamente) -[:IN_GENRE]-> (Comedia),
+    (Intensamente) -[:IN_GENRE]-> (Drama),
 
 
     (SpiderManSpiderverse: Movie {title: 'Spider-Man: un nuevo universo', year:2018}),
-    (ColumbiaPictures)
-    (SonyPictures)
-    (Marvel)
-    (BobPersichetti)
-    (PeterRamsey)
-    (RodneyRothman)
-    (Nueve)
-    (Animacion)
-    (Accion)
-    (CienciaFiccion)
-    (Aventura)
+    (ColumbiaPictures) -[:PRODUCED]-> (SpiderManSpiderverse),
+    (SonyPictures) -[:PRODUCED]-> (SpiderManSpiderverse),
+    (Marvel) -[:PRODUCED]-> (SpiderManSpiderverse),
+    (BobPersichetti) -[:DIRECTED]-> (SpiderManSpiderverse),
+    (PeterRamsey) -[:DIRECTED]-> (SpiderManSpiderverse),
+    (RodneyRothman) -[:DIRECTED]-> (SpiderManSpiderverse),
+    (Nueve) -[:RATED]-> (SpiderManSpiderverse),
+    (SpiderManSpiderverse) -[:IN_GENRE]-> (Animacion),
+    (SpiderManSpiderverse) -[:IN_GENRE]-> (Accion),
+    (SpiderManSpiderverse) -[:IN_GENRE]-> (CienciaFiccion),
+    (SpiderManSpiderverse) -[:IN_GENRE]-> (Aventura),
 
 
     (Avengers: Movie {title: 'The Avengers', year:2012}),
-    (Marvel)
-    (Paramount)
-    (JossWedon)
-    (Ocho)
-    (Accion)
-    (CienciaFiccion)
-    (Aventura)
-    (Superheroes)
-    (RobertDowneyJr)
-    (ChrisEvans)
-    (MarkRuffalo)
-    (ChrisHemsworth)
-    (ScarlettJohansson)
-    (JeremyRenner)
-    (TomHiddleston)
-    (ClarkGregg)
-    (CobieSmulders)
-    (SamuelLJackson)
+    (Marvel) -[:PRODUCED]-> (Avengers),
+    (Paramount) -[:PRODUCED]-> (Avengers),
+    (JossWedon) -[:DIRECTED]-> (Avengers),
+    (Ocho) -[:RATED]-> (Avengers),
+    (Avengers) -[:IN_GENRE]-> (Accion),
+    (Avengers) -[:IN_GENRE]-> (CienciaFiccion),
+    (Avengers) -[:IN_GENRE]-> (Aventura),
+    (Avengers) -[:IN_GENRE]-> (Superheroes),
+    (RobertDowneyJr) -[:ACTED_IN]-> (Avengers),
+    (ChrisEvans) -[:ACTED_IN]-> (Avengers),
+    (MarkRuffalo) -[:ACTED_IN]-> (Avengers),
+    (ChrisHemsworth) -[:ACTED_IN]-> (Avengers),
+    (ScarlettJohansson) -[:ACTED_IN]-> (Avengers),
+    (JeremyRenner) -[:ACTED_IN]-> (Avengers),
+    (TomHiddleston) -[:ACTED_IN]-> (Avengers),
+    (ClarkGregg) -[:ACTED_IN]-> (Avengers),
+    (CobieSmulders) -[:ACTED_IN]-> (Avengers),
+    (SamuelLJackson) -[:ACTED_IN]-> (Avengers),
 
 
     (AvengersUltron: Movie {title: 'Avengers: Age of Ultron', year:2015}),
-    (Marvel)
-    (JossWedon)
-    (Siete)
-    (Accion)
-    (CienciaFiccion)
-    (Aventura)
-    (Superheroes)
-    (RobertDowneyJr)
+    (Marvel) -[:PRODUCED]-> (AvengersUltron),
+    (JossWedon) -[:DIRECTED]-> (AvengersUltron),
+    (Siete) -[:RATED]-> (AvengersUltron),
+    (AvengersUltron) -[:IN_GENRE]-> (Accion),
+    (AvengersUltron) -[:IN_GENRE]-> (CienciaFiccion),
+    (AvengersUltron) -[:IN_GENRE]-> (Aventura),
+    (AvengersUltron) -[:IN_GENRE]-> (Superheroes),
+    (RobertDowneyJr) -[:ACTED_IN]-> (AvengersUltron),
     (ChrisEvans)
     (MarkRuffalo)
     (ChrisHemsworth)
@@ -267,14 +271,14 @@ CREATE
 
 
     (AvengersInfinityWar: Movie {title: 'Avengers: Infinity War', year:2018}),
-    (Marvel)
-    (AnthonyRusso)
-    (JoeRusso)
-    (Nueve)
-    (Accion)
-    (CienciaFiccion)
-    (Aventura)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (AvengersInfinityWar),
+    (AnthonyRusso) -[:DIRECTED]-> (AvengersInfinityWar),
+    (JoeRusso) -[:DIRECTED]-> (AvengersInfinityWar),
+    (Nueve) -[:RATED]-> (AvengersInfinityWar),
+    (AvengersInfinityWar) -[:IN_GENRE]-> (Accion),
+    (AvengersInfinityWar) -[:IN_GENRE]-> (CienciaFiccion),
+    (AvengersInfinityWar) -[:IN_GENRE]-> (Aventura),
+    (AvengersInfinityWar) -[:IN_GENRE]-> (Superheroes),
     (RobertDowneyJr)
     (ChrisEvans)
     (MarkRuffalo)
@@ -299,14 +303,14 @@ CREATE
 
 
     (AvengersEndGame: Movie {title: 'Avengers: Endgame', year:2018}),
-    (Marvel)
-    (AnthonyRusso)
-    (JoeRusso)
-    (Nueve)
-    (Accion)
-    (CienciaFiccion)
-    (Aventura)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (AvengersEndGame),
+    (AnthonyRusso) -[:DIRECTED]-> (AvengersEndGame),
+    (JoeRusso) -[:DIRECTED]-> (AvengersEndGame),
+    (Nueve) -[:RATED]-> (AvengersEndGame),
+    (AvengersEndGame) -[:IN_GENRE]-> (Accion),
+    (AvengersEndGame) -[:IN_GENRE]-> (CienciaFiccion),
+    (AvengersEndGame) -[:IN_GENRE]-> (Aventura),
+    (AvengersEndGame) -[:IN_GENRE]-> (Superheroes),
     (RobertDowneyJr)
     (ChrisEvans)
     (MarkRuffalo)
@@ -334,12 +338,12 @@ CREATE
 
 
     (IronMan: Movie {title: 'Iron Man: el hombre de hierro', year:2008}),
-    (Marvel)
-    (JonFavreau)
-    (Ocho)
-    (Accion)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (IronMan),
+    (JonFavreau) -[:DIRECTED]-> (IronMan),
+    (Ocho) -[:RATED]-> (IronMan),
+    (IronMan) -[:IN_GENRE]-> (Accion),
+    (IronMan) -[:IN_GENRE]-> (CienciaFiccion),
+    (IronMan) -[:IN_GENRE]-> (Superheroes),
     (RobertDowneyJr)
     (JonFavreau)
     (GwynethPaltrow)
@@ -348,14 +352,14 @@ CREATE
 
 
     (IronMan2: Movie {title: 'Iron Man 2', year:2010}),
-    (Marvel)
-    (Paramount)
-    (FairView)
-    (JonFavreau)
-    (Siete)
-    (Accion)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (IronMan2),
+    (Paramount) -[:PRODUCED]-> (IronMan2),
+    (FairView) -[:PRODUCED]-> (IronMan2),
+    (JonFavreau) -[:DIRECTED]-> (IronMan2),
+    (Siete) -[:RATED]-> (IronMan2),
+    (IronMan2) -[:IN_GENRE]-> (Accion),
+    (IronMan2) -[:IN_GENRE]-> (CienciaFiccion),
+    (IronMan2) -[:IN_GENRE]-> (Superheroes),
     (RobertDowneyJr)
     (JonFavreau)
     (GwynethPaltrow)
@@ -367,29 +371,29 @@ CREATE
 
 
     (IronMan3: Movie {title: 'Iron Man 3', year:2013}),
-    (Marvel)
-    (Paramount)
-    (DMGEntertainment)
-    (NobleMedia)
-    (JonFavreau)
-    (Siete)
-    (Accion)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (IronMan3),
+    (Paramount) -[:PRODUCED]-> (IronMan3),
+    (DMGEntertainment) -[:PRODUCED]-> (IronMan3),
+    (NobleMedia) -[:PRODUCED]-> (IronMan3),
+    (JonFavreau) -[:DIRECTED]-> (IronMan3),
+    (Siete) -[:RATED]-> (IronMan3),
+    (IronMan3) -[:IN_GENRE]-> (Accion),
+    (IronMan3) -[:IN_GENRE]-> (CienciaFiccion),
+    (IronMan3) -[:IN_GENRE]-> (Superheroes),
     (RobertDowneyJr)
     (JonFavreau)
     (GwynethPaltrow)
 
 
     (CapitanAmerica1: Movie {title: 'Capitán America: The First Avenger', year:2011}),
-    (Marvel)
-    (JoeJohnston)
-    (Seis)
-    (Aventura)
-    (CienciaFiccion)
-    (Superheroes)
-    (Accion)
-    (Guerra)
+    (Marvel) -[:PRODUCED]-> (CapitanAmerica1),
+    (JoeJohnston) -[:DIRECTED]-> (CapitanAmerica1),
+    (Seis) -[:RATED]-> (CapitanAmerica1),
+    (CapitanAmerica1) -[:IN_GENRE]-> (Aventura),
+    (CapitanAmerica1) -[:IN_GENRE]-> (CienciaFiccion),
+    (CapitanAmerica1) -[:IN_GENRE]-> (Superheroes),
+    (CapitanAmerica1) -[:IN_GENRE]-> (Accion),
+    (CapitanAmerica1) -[:IN_GENRE]-> (Guerra),
     (ChrisEvans)
     (TommyLeeJones)
     (HayleyAtwell)
@@ -398,14 +402,14 @@ CREATE
 
 
     (TheWinterSoldier: Movie {title: 'Capitán América: The Winter Soldier', year:2014}),
-    (Marvel)
-    (AnthonyRusso)
-    (JoeRusso)
-    (Ocho)
-    (Aventura)
-    (Accion)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (TheWinterSoldier),
+    (AnthonyRusso) -[:DIRECTED]-> (TheWinterSoldier),
+    (JoeRusso) -[:DIRECTED]-> (TheWinterSoldier),
+    (Ocho) -[:RATED]-> (TheWinterSoldier),
+    (TheWinterSoldier) -[:IN_GENRE]-> (Aventura),
+    (TheWinterSoldier) -[:IN_GENRE]-> (Accion),
+    (TheWinterSoldier) -[:IN_GENRE]-> (CienciaFiccion),
+    (TheWinterSoldier) -[:IN_GENRE]-> (Superheroes),
     (ChrisEvans)
     (ScarlettJohansson)
     (SebastianStan)
@@ -415,13 +419,13 @@ CREATE
 
 
     (CivilWar: Movie {title: 'Capitán América: Civil War', year:2016}),
-    (Marvel)
-    (AnthonyRusso)
-    (JoeRusso)
-    (Ocho)
-    (Accion)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (CivilWar),
+    (AnthonyRusso) -[:DIRECTED]-> (CivilWar),
+    (JoeRusso) -[:DIRECTED]-> (CivilWar),
+    (Ocho) -[:RATED]-> (CivilWar),
+    (CivilWar) -[:IN_GENRE]-> (Accion),
+    (CivilWar) -[:IN_GENRE]-> (CienciaFiccion),
+    (CivilWar) -[:IN_GENRE]-> (Superheroes),
     (ChrisEvans)
     (RobertDowneyJr)
     (ScarlettJohansson)
@@ -436,15 +440,15 @@ CREATE
 
 
     (Thor: Movie {title: 'Thor', year:2011}),
-    (Marvel)
-    (KennethBranagh)
-    (Siete)
-    (Accion)
-    (CienciaFiccion)
-    (Aventura)
-    (Fantasia)
-    (Epico)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (Thor),
+    (KennethBranagh) -[:DIRECTED]-> (Thor),
+    (Siete) -[:RATED]-> (Thor),
+    (Thor) -[:IN_GENRE]-> (Accion),
+    (Thor) -[:IN_GENRE]-> (CienciaFiccion),
+    (Thor) -[:IN_GENRE]-> (Aventura),
+    (Thor) -[:IN_GENRE]-> (Fantasia),
+    (Thor) -[:IN_GENRE]-> (Epico),
+    (Thor) -[:IN_GENRE]-> (Superheroes),
     (ChrisHemsworth)
     (TomHiddleston)
     (NataliePortman)
@@ -454,15 +458,15 @@ CREATE
 
 
     (Thor2: Movie {title: 'Thor: The Dark World', year:2013}),
-    (Marvel)
-    (AlanTaylor)
-    (Siete)
-    (Accion)
-    (Fantasia)
-    (CienciaFiccion)
-    (Epico)
-    (Aventura)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (Thor2),
+    (AlanTaylor) -[:DIRECTED]-> (Thor2),
+    (Siete) -[:RATED]-> (Thor2),
+    (Thor2) -[:IN_GENRE]-> (Accion),
+    (Thor2) -[:IN_GENRE]-> (Fantasia),
+    (Thor2) -[:IN_GENRE]-> (CienciaFiccion),
+    (Thor2) -[:IN_GENRE]-> (Epico),
+    (Thor2) -[:IN_GENRE]-> (Aventura),
+    (Thor2) -[:IN_GENRE]-> (Superheroes),
     (ChrisHemsworth)
     (TomHiddleston)
     (NataliePortman)
@@ -472,14 +476,14 @@ CREATE
 
 
     (Thor3: Movie {title: 'Thor Ragnarok', year:2017}),
-    (Marvel)
-    (TaikaWaititi)
-    (Ocho)
-    (Accion)
-    (Aventura)
-    (Fantasia)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (Thor3),
+    (TaikaWaititi) -[:DIRECTED]-> (Thor3),
+    (Ocho) -[:RATED]-> (Thor3),
+    (Thor3) -[:IN_GENRE]-> (Accion),
+    (Thor3) -[:IN_GENRE]-> (Aventura),
+    (Thor3) -[:IN_GENRE]-> (Fantasia),
+    (Thor3) -[:IN_GENRE]-> (CienciaFiccion),
+    (Thor3) -[:IN_GENRE]-> (Superheroes),
     (ChrisHemsworth)
     (TomHiddleston)
     (CateBlanchett)
@@ -489,14 +493,14 @@ CREATE
 
 
     (SpiderMan: Movie {title: 'Spider-Man', year:2002}),
-    (Marvel)
-    (ColumbiaPictures)
-    (SamRaimi)
-    (Siete)
-    (Accion)
-    (CienciaFiccion)
-    (Drama)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (SpiderMan),
+    (ColumbiaPictures) -[:PRODUCED]-> (SpiderMan),
+    (SamRaimi) -[:DIRECTED]-> (SpiderMan),
+    (Siete) -[:RATED]-> (SpiderMan),
+    (SpiderMan) -[:IN_GENRE]-> (Accion),
+    (SpiderMan) -[:IN_GENRE]-> (CienciaFiccion),
+    (SpiderMan) -[:IN_GENRE]-> (Drama),
+    (SpiderMan) -[:IN_GENRE]-> (Superheroes),
     (TobeyMaguire)
     (WillemDafoe)
     (KirstenDunst)
@@ -511,14 +515,14 @@ CREATE
 
 
     (SpiderMan2: Movie {title: 'Spider-Man 2', year:2004}),
-    (Marvel)
-    (ColumbiaPictures)
-    (SamRaimi)
-    (Siete)
-    (Accion)
-    (CienciaFiccion)
-    (Drama)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (SpiderMan2),
+    (ColumbiaPictures) -[:PRODUCED]-> (SpiderMan2),
+    (SamRaimi) -[:DIRECTED]-> (SpiderMan2),
+    (Siete) -[:RATED]-> (SpiderMan2),
+    (SpiderMan2) -[:IN_GENRE]-> (Accion),
+    (SpiderMan2) -[:IN_GENRE]-> (CienciaFiccion),
+    (SpiderMan2) -[:IN_GENRE]-> (Drama),
+    (SpiderMan2) -[:IN_GENRE]-> (Superheroes),
     (TobeyMaguire)
     (AlfredMolina)
     (KirstenDunst)
@@ -531,14 +535,14 @@ CREATE
 
 
     (SpiderMan3: Movie {title: 'Spider-Man 3', year:2007}),
-    (Marvel)
-    (ColumbiaPictures)
-    (SamRaimi)
-    (Seis)
-    (Accion)
-    (CienciaFiccion)
-    (Drama)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (SpiderMan3),
+    (ColumbiaPictures) -[:PRODUCED]-> (SpiderMan3),
+    (SamRaimi) -[:DIRECTED]-> (SpiderMan3),
+    (Seis) -[:RATED]-> (SpiderMan3),
+    (SpiderMan3) -[:IN_GENRE]-> (Accion),
+    (SpiderMan3) -[:IN_GENRE]-> (CienciaFiccion),
+    (SpiderMan3) -[:IN_GENRE]-> (Drama),
+    (SpiderMan3) -[:IN_GENRE]-> (Superheroes),
     (TobeyMaguire)
     (AlfredMolina)
     (KirstenDunst)
@@ -550,15 +554,15 @@ CREATE
     (TedRaimi)
 
     (SpiderManHomecoming: Movie {title: 'Spider-Man: Homecoming', year:2017}),
-    (Marvel)
-    (ColumbiaPictures)
-    (PascalPictures)
-    (JonWatts)
-    (Ocho)
-    (Accion)
-    (Aventura)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (SpiderManHomecoming),
+    (ColumbiaPictures) -[:PRODUCED]-> (SpiderManHomecoming),
+    (PascalPictures) -[:PRODUCED]-> (SpiderManHomecoming),
+    (JonWatts) -[:DIRECTED]-> (SpiderManHomecoming),
+    (Ocho) -[:RATED]-> (SpiderManHomecoming),
+    (SpiderManHomecoming) -[:IN_GENRE]-> (Accion),
+    (SpiderManHomecoming) -[:IN_GENRE]-> (CienciaFiccion),
+    (SpiderManHomecoming) -[:IN_GENRE]-> (Aventura),
+    (SpiderManHomecoming) -[:IN_GENRE]-> (Superheroes),
     (TomHolland)
     (JonFavreau)
     (Zendaya)
@@ -568,14 +572,14 @@ CREATE
     (RobertDowneyJr)
 
     (AntMan: Movie {title: 'Ant-Man: el Hombre Hormiga', year:2015}),
-    (Marvel)
-    (PeytonReed)
-    (Siete)
-    (Accion)
-    (Aventura)
-    (CienciaFiccion)
-    (Comedia)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (AntMan),
+    (PeytonReed) -[:DIRECTED]-> (AntMan),
+    (Siete) -[:RATED]-> (AntMan),
+    (AntMan) -[:IN_GENRE]-> (Accion),
+    (AntMan) -[:IN_GENRE]-> (Aventura),
+    (AntMan) -[:IN_GENRE]-> (Comedia),
+    (AntMan) -[:IN_GENRE]-> (CienciaFiccion),
+    (AntMan) -[:IN_GENRE]-> (Superheroes),
     (PaulRudd)
     (EvangelineLilly)
     (CoreyStoll)
@@ -585,13 +589,14 @@ CREATE
     (MichaelDouglas)
 
     (AntManTheWasp: Movie {title: 'Ant-Man and the Wasp', year:2018}),
-    (Marvel)
-    (PeytonReed)
-    (Siete)
-    (Accion)
-    (CienciaFiccion)
-    (Aventura)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (AntManTheWasp),
+    (PeytonReed) -[:DIRECTED]-> (AntManTheWasp),
+    (Siete) -[:RATED]-> (AntManTheWasp),
+    (AntManTheWasp) -[:IN_GENRE]-> (Accion),
+    (AntManTheWasp) -[:IN_GENRE]-> (Aventura),
+    (AntManTheWasp) -[:IN_GENRE]-> (Comedia),
+    (AntManTheWasp) -[:IN_GENRE]-> (CienciaFiccion),
+    (AntManTheWasp) -[:IN_GENRE]-> (Superheroes),
     (PaulRudd)
     (EvangelineLilly)
     (MichaelPena)
@@ -599,26 +604,26 @@ CREATE
     (BobbyCannavale)
 
     (DoctorStrange: Movie {title: 'Doctor Strange: hechicero supremo', year:2016}),
-    (Marvel)
-    (ScottDerrickson)
-    (Ocho)
-    (Accion)
-    (Fantasia)
-    (Aventura)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (DoctorStrange),
+    (ScottDerrickson) -[:DIRECTED]-> (DoctorStrange),
+    (Ocho) -[:RATED]-> (DoctorStrange),
+    (DoctorStrange) -[:IN_GENRE]-> (Accion),
+    (DoctorStrange) -[:IN_GENRE]-> (Fantasia),
+    (DoctorStrange) -[:IN_GENRE]-> (Aventura),
+    (DoctorStrange) -[:IN_GENRE]-> (Superheroes),
     (BenedictCumberbatch)
     (BenedictWong)
     (ChiwetelEjiofor)
     (RachelMcAdams)
 
     (BlackPanther: Movie {title: 'Black Panther', year:2018}),
-    (Marvel)
-    (RyanCoogler)
-    (Siete)
-    (Accion)
-    (Aventura)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (BlackPanther),
+    (RyanCoogler) -[:DIRECTED]-> (BlackPanther),
+    (Siete) -[:RATED]-> (BlackPanther),
+    (BlackPanther) -[:IN_GENRE]-> (Accion),
+    (BlackPanther) -[:IN_GENRE]-> (Aventura),
+    (BlackPanther) -[:IN_GENRE]-> (CienciaFiccion),
+    (BlackPanther) -[:IN_GENRE]-> (Superheroes),
     (ChadwickBoseman)
     (MihaelBJordan)
     (LupitaNyongo)
@@ -626,27 +631,27 @@ CREATE
     (MartinFreeman)
 
     (CapitanaMarvel: Movie {title: 'Capitana Marvel', year:2019}),
-    (Marvel)
-    (RyanFleck)
-    (AnnaBoden)
-    (Siete)
-    (Accion)
-    (CienciaFiccion)
-    (Acentura)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (CapitanaMarvel),
+    (RyanFleck) -[:DIRECTED]-> (CapitanaMarvel),
+    (AnnaBoden) -[:DIRECTED]-> (CapitanaMarvel),
+    (Siete) -[:RATED]-> (CapitanaMarvel),
+    (CapitanaMarvel) -[:IN_GENRE]-> (Accion),
+    (CapitanaMarvel) -[:IN_GENRE]-> (CienciaFiccion),
+    (CapitanaMarvel) -[:IN_GENRE]-> (Acentura),
+    (CapitanaMarvel) -[:IN_GENRE]-> (Superheroes),
     (BrieLarson)
     (SamuelLJackson)
     (ClarkGregg)
 
     (GuardianesGalaxia: Movie {title: 'Guardianes de la Galaxia', year:2014}),
-    (Marvel)
-    (JamesGunn)
-    (Ocho)
-    (Accion)
-    (Comedia)
-    (CienciaFiccion)
-    (Aventura)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (GuardianesGalaxia),
+    (JamesGunn) -[:DIRECTED]-> (GuardianesGalaxia),
+    (Ocho) -[:RATED]-> (GuardianesGalaxia),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (Accion),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (Comedia),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (CienciaFiccion),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (Aventura),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (Superheroes),
     (ChrisPratt)
     (DaveBautista)
     (VinDiesel)
@@ -656,14 +661,14 @@ CREATE
     (BenicioDelToro)
 
     (GuardianesGalaxia2: Movie {title: 'Guardianes de la Galaxia Vol. 2', year:2017}),
-    (Marvel)
-    (JamesGunn)
-    (Ocho)
-    (Accion)
-    (Aventura)
-    (Comedia)
-    (CienciaFiccion)
-    (Superheroes)
+    (Marvel) -[:PRODUCED]-> (GuardianesGalaxia2),
+    (JamesGunn) -[:DIRECTED]-> (GuardianesGalaxia2),
+    (Ocho) -[:RATED]-> (GuardianesGalaxia2),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (Accion),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (Comedia),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (CienciaFiccion),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (Aventura),
+    (GuardianesGalaxia) -[:IN_GENRE]-> (Superheroes),
     (ChrisPratt)
     (DaveBautista)
     (VinDiesel)
@@ -673,22 +678,234 @@ CREATE
     (BenicioDelToro)
 
     (ElHombreDeAcero: Movie {title: 'El Hombre de Acero', year:2013}),
-    (Aquaman: Movie {title: 'Aquaman', year:2018}),
-    (WonderWoman: Movie {title: 'Wonder Woman', year:2017}),
+    (DCEntertainment) -[:PRODUCED]-> (ElHombreDeAcero),
+    (LegendaryPictures) -[:PRODUCED]-> (ElHombreDeAcero),
+    (ZackSnyder) -[:DIRECTED]-> (ElHombreDeAcero),
+    (Siete) -[:RATED]-> (ElHombreDeAcero),
+    (ElHombreDeAcero) -[:IN_GENRE]-> (CienciaFiccion),
+    (ElHombreDeAcero) -[:IN_GENRE]-> (Accion),
+    (ElHombreDeAcero) -[:IN_GENRE]-> (Superheroes),
+    (HenryCavill)
+    (AmyAdams)
+    (MichaelShannon)
+    (DianeLane)
+    (KevinCostner)
+    (LaurenceFishburne)
+    (AntjeTraue)
+    (AyeletZurer)
+    (ChristopherMeloni)
+    (RusselCrowe)
 
-    
+    (Aquaman: Movie {title: 'Aquaman', year:2018}),
+    (WarnerBrosPictures) -[:PRODUCED]-> (Aquaman),
+    (DCEntertainment) -[:PRODUCED]-> (Aquaman),
+    (TheSafranCompany) -[:PRODUCED]-> (Aquaman),
+    (CruelAndUnusualFilms) -[:PRODUCED]-> (Aquaman),
+    (MadGhostProductions) -[:PRODUCED]-> (Aquaman),
+    (JamesWan) -[:DIRECTED]-> (Aquaman),
+    (Siete) -[:RATED]-> (Aquaman),
+    (Aquaman) -[:IN_GENRE]-> (Accion),
+    (Aquaman) -[:IN_GENRE]-> (Aventura),
+    (Aquaman) -[:IN_GENRE]-> (Superheroes),
+    (Aquaman) -[:IN_GENRE]-> (CienciaFiccion),
+    (JasonMomoa)
+    (PatrickWilson)
+    (AmberHeard)
+    (RandallPark)
+    (JulieAndrews)
+    (YahyaAbdulMateen)
+    (WillemDafoe)
+    (TemueraMorrison)
+    (DolphLundgren)
+    (NicoleKidman)
+
+    (WonderWoman: Movie {title: 'Wonder Woman', year:2017}),
+    (DCEntertainment) -[:PRODUCED]-> (WonderWoman),
+    (RatPacEntertainment) -[:PRODUCED]-> (WonderWoman),
+    (AtlasEntertainment) -[:PRODUCED]-> (WonderWoman),
+    (CruelAndUnusualFilms) -[:PRODUCED]-> (WonderWoman),
+    (TencentPictures) -[:PRODUCED]-> (WonderWoman),
+    (WandaPictures) -[:PRODUCED]-> (WonderWoman),
+    (PattyJenkins) -[:DIRECTED]-> (WonderWoman),
+    (Ocho) -[:RATED]-> (WonderWoman),
+    (WonderWoman) -[:IN_GENRE]-> (Accion),
+    (WonderWoman) -[:IN_GENRE]-> (Fantasia),
+    (WonderWoman) -[:IN_GENRE]-> (Aventura),
+    (WonderWoman) -[:IN_GENRE]-> (Superheroes),
+    (GalGadot)
+    (ChrisPine)
+    (RobinWright)
+    (DannyHuston)
+    (ElenaAnaya)
+    (DavidThewlis)
+    (ConnieNielsen)
+
+
     (WhatIf: Movie {title: 'What If', year:2013}),
+    (NoTraceComping)
+    (CaramelFilm)
+    (FastnetFilms)
+    (MichaelDowse)
+    (Siete)
+    (Comedia)
+    (Romance)
+    (DanielRadcliffe)
+    (MackenzieDavis)
+    (ZoeKazan)
+    (AdamDriver)
+
+
     (BajoEstrella: Movie {title: 'Bajo la misma estrella', year:2014}),
+    (TempleHillEntertainment)
+    (TSGEntertainment)
+    (JoshBoone)
+    (Ocho)
+    (Romance)
+    (Drama)
+    (ShaileneWoodley)
+    (AnselElgort)
+    (LauraDern)
+    (SamTrammell)
+    (NatWolff)
+    (WillemDafoe)
+
     (TresMetrosCielo: Movie {title: 'Tres metros sobre el cielo', year:2010}),
+    (ZetaAudiovisual)
+    (Antena3)
+    (CangrejoFilms)
+    (FernandoGonzalezMolina)
+    (CarlosRodriguez)
+    (Siete)
+    (Drama)
+    (Romance)
+    (MarioCasas)
+    (MariaValverde)
+    (AlvaroCervantes)
+    (MarinaSalas)
+    (AndreaDuro)
+    (NereaCamacho)
+    (LuisFernandez)
+    (DiegoMartin)
+
     (ADosMetrosDeTi: Movie {title: 'A dos metros de ti', year:2019}),
+    (CBSFilms)
+    (WayfarerEntertainment)
+    (JustinBaldoni)
+    (Siete)
+    (Drama)
+    (Romance)
+    (HaleyLuRichardson)
+    (ColeSprouse)
+
     (NoAceptanDevoluciones: Movie {title: 'No se aceptan devoluciones', year:2013}),
+    (AlebrijeCine)
+    (VideoFulano,Mengano,YAsociados)
+    (EugenioDerbez)
+    (Ocho)
+    (Comedia)
+    (Drama)
+    (EugenioDerbez)
+    (JessicaLindsey)
+    (LoretoPeralta)
+    (DanielRaymont)
+    (AlessandraRosaldo)
+    (HugoStiglitz)
+    (AgustinBernal)
+
     (PosdataTeAmo: Movie {title: 'Posdata, te amo', year:2007}),
+    (AlconEntertainment)
+    (GrosvenorPark)
+    (2SFilms)
+    (RichardLaGravenese)
+    (Siete)
+    (Comedia)
+    (Romance)
+    (HilarySwank)
+    (GerardButler)
+    (LisaKudrow)
+    (GinaGershon)
+    (JeffreyDeanMorgan)
+    (KathyBates)
+    (HarryConnickJr.)
+    (JamesMarsters)
+
     (GrandesHeroes: Movie {title: 'Grandes Héroes', year:2014}),
+    (Marvel)
+    (WaltDisney)
+    (DonHall)
+    (ChrisWilliams)
+    (Ocho)
+    (Animacion)
+    (Drama)
+    (Comedia)
+    (Aventura)
+    (RyanPotter)
+    (ScottAdsit)
+    (DanielHenney)
+    (T.J.Miller)
+    (JamieChung)
+    (DamonWayansJr.)
+    (GenesisRodriguez)
+    (AlanTudyk)
+    (JamesCromwell)
+    (MayaRudolph)
+
     (LeapYear: Movie {title: 'Leap Year', year:2010}),
+    (UniversalStudios)
+    (SpyglassEntertainment)
+    (AnandTucker)
+    (Siete)
+    (Comedia)
+    (Romance)
+    (AmyAdams)
+    (MatthewGoode)
+    (AdamScott)
+    (JohnLithgow)
+
     (Flipped: Movie {title: 'Flipped', year:2010}),
+    (CastleRockEntertainment)
+    (RobReiner)
+    (Ocho)
+    (Romance)
+    (CallanMcAuliffe)
+    (MadelineCarroll)
+
     (LosIlusionistas: Movie {title: 'Los Ilusionistas: nada es lo que parece', year:2013}),
-    (GhostInShell: Movie {title: 'Ghost in the Shell: vigilante del futuro', year:2017}),
+    (K/OPaperProducts)
+    (LouisLeterrier)
+    (Siete)
+    (Suspenso)
+    (JesseEisenberg)
+    (MarkRuffalo)
+    (WoodyHarrelson)
+    (MelanieLaurent)
+    (IslaFisher)
+    (DaveFranco)
+    (MichaelCaine)
+    (MorganFreeman)
+
     (BladeRunner2049: Movie {title: 'Blade Runner 2049', year:2017}),
+    (AlconEntertainment)
+    (ColumbiaPictures)
+    (BudYorkinProductions)
+    (TorridonFilms)
+    (DenisVilleneuve)
+    (Ocho)
+    (CienciaFiccion)
+    (RyanGosling)
+    (HarrisonFord)
+    (RobinWright)
+    (DaveBautista)
+    (AnaDeArmas)
+    (SylviaHoeks)
+    (CarlaJuri)
+    (MackenzieDavis)
+    (BarkhadAbdi)
+    (DavidDastmalchian)
+    (HiamAbbass)
+    (LennieJames)
+    (JaredLeto)
+
     (StarWarsEpisodio3: Movie {title: 'Star Wars: episodio III - La Venganza de los Sith', year:2005}),
     (TheHungerGames: Movie {title: 'The Hunger Games', year:2012}),
     (LaPropuesta: Movie {title: 'La Propuesta', year:2009}),
