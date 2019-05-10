@@ -23,39 +23,7 @@
 
 // Movies
 CREATE
-    //Genero
-    (Accion: Genre {name: 'Accion'}),
-    (Animacion: Genre {name: 'Animacion'}),
-    (Aventura: Genre {name: 'Aventura'}),
-    (CienciaFiccion: Genre {name: 'Ciencia Ficcion'}),
-    (Misterio: Genre {name: 'Misterio'}),
-    (Terror: Genre {name: 'Terror'}),
-    (Epico: Genre {name: 'Epico'}),
-    (Fantasia: Genre {name: 'Fantastico'}),
-    (Historico: Genre {name: 'Historico'}),
-    (Musical: Genre {name: 'Musical'}),
-    (Policiaco: Genre {name: 'Policiaco'}),
-    (Romantico: Genre {name: 'Romantico'}),
-    (Comedia: Genre {name: 'Comedia'}),
-    (Drama: Genre {name: 'Drama'}),
-    (Thriller: Genre {name: 'Thriller'}),
-    (Superheroes: Genre {name: 'Superheroes'}),
-    (Guerra: Genre {name: 'Guerra'}),
-
-
-    //Calificacion
-    (Una: Calificacion {name: 'Una Estrella'}),
-    (Dos: Calificacion {name: 'Dos Estrellas'}),
-    (Tres: Calificacion {name: 'Tres Estrellas'}),
-    (Cuatro: Calificacion {name: 'Cuatro Estrellas'}),
-    (Cinco: Calificacion {name: 'Cinco Estrellas'}),
-    (Seis: Calificacion {name: 'Seis Estrellas'}),
-    (Siete: Calificacion {name: 'Siete Estrellas'}),
-    (Ocho: Calificacion {name: 'Ocho Estrellas'}),
-    (Nueve: Calificacion {name: 'Nueve Estrellas'}),
-    (Diez: Calificacion {name: 'Diez Estrellas'}),
-
-    //Casas Productoras
+    //Productoras
     (Paramount: Productor {name: 'Paramount Pictures'}),
     (ImagineEntertainment: Productor {name: 'Imagine Entertainment'}),
     (Pixar: Productor {name: 'Pixar'}),
@@ -80,14 +48,57 @@ CREATE
     (WandaPictures: Productor {name: 'Wanda Pictures'}),
 
 
+    //Generos
+    (Accion: Genre {name: 'Accion'}),
+    (Animacion: Genre {name: 'Animacion'}),
+    (Aventura: Genre {name: 'Aventura'}),
+    (CienciaFiccion: Genre {name: 'Ciencia Ficcion'}),
+    (Misterio: Genre {name: 'Misterio'}),
+    (Terror: Genre {name: 'Terror'}),
+    (Epico: Genre {name: 'Epico'}),
+    (Fantasia: Genre {name: 'Fantastico'}),
+    (Historico: Genre {name: 'Historico'}),
+    (Musical: Genre {name: 'Musical'}),
+    (Policiaco: Genre {name: 'Policiaco'}),
+    (Romantico: Genre {name: 'Romantico'}),
+    (Comedia: Genre {name: 'Comedia'}),
+    (Drama: Genre {name: 'Drama'}),
+    (Thriller: Genre {name: 'Thriller'}),
+    (Superheroes: Genre {name: 'Superheroes'}),
+    (Guerra: Genre {name: 'Guerra'}),
 
-//---------------------------------------------------------------------------
-//Movies
-    (TopGun: Movie {title: "Top Gun", year:1986}),
+
+    //Calificaciones
+    (Una: Calificacion {name: 1}),
+    (Dos: Calificacion {name: 2}),
+    (Tres: Calificacion {name: 3}),
+    (Cuatro: Calificacion {name: 4}),
+    (Cinco: Calificacion {name: 5}),
+    (Seis: Calificacion {name: 6}),
+    (Siete: Calificacion {name: 7}),
+    (Ocho: Calificacion {name: 8}),
+    (Nueve: Calificacion {name: 9}),
+    (Diez: Calificacion {name: 10}),
+
+
+    //Directores y Actores
     (KellyM: Person {name: 'Kelly McGillis'}),
     (TomC: Person {name: 'Tom Cruise'}),
     (ValK: Person {name: 'Val Kilmer'}),
     (TonyS: Person {name: 'Tony Scott'}),
+    (EdH: Person {name: 'Ed Harris'}),
+    (BillPax: Person {name: 'Bill Paxton'}),
+    (TomH: Person {name: 'Tom Hanks'}),
+    (RonH: Person {name: 'Ron Howard'}),
+
+
+    //Awards
+
+
+
+//---------------------------------------------------------------------------
+//Movies
+    (TopGun: Movie {title: "Top Gun", year:1986}),
     (Paramount) -[:PRODUCED]-> (TopGun),
     (TonyS) -[:DIRECTED]-> (TopGun),
     (Siete) -[:RATED]-> (TopGun),
@@ -99,10 +110,6 @@ CREATE
 
 
     (Apollo13: Movie {title: 'Apollo 13', year:1995}),
-    (EdH: Person {name: 'Ed Harris'}),
-    (BillPax: Person {name: 'Bill Paxton'}),
-    (TomH: Person {name: 'Tom Hanks'}),
-    (RonH: Person {name: 'Ron Howard'}),
     (ImagineEntertainment) -[:PRODUCED]-> (Apollo13),
     (RonH) -[:DIRECTED]-> (Apollo13),
     (Ocho) -[:RATED]-> (Apollo13),
@@ -798,173 +805,173 @@ CREATE
 
 
     (WhatIf: Movie {title: 'What If', year:2013}),
-    (NoTraceComping)
-    (CaramelFilm)
-    (FastnetFilms)
-    (MichaelDowse)
-    (Siete)
+    (NoTraceComping) -[:PRODUCED]-> (WhatIf),
+    (CaramelFilm) -[:PRODUCED]-> (WhatIf),
+    (FastnetFilms) -[:PRODUCED]-> (WhatIf),
+    (MichaelDowse) -[:DIRECTED]-> (WhatIf),
+    (Siete) -[:RATED]-> (WhatIf),
     (Comedia)
     (Romance)
-    (DanielRadcliffe)
-    (MackenzieDavis)
-    (ZoeKazan)
-    (AdamDriver)
+    (DanielRadcliffe) -[:ACTED_IN]-> (WhatIf),
+    (MackenzieDavis) -[:ACTED_IN]-> (WhatIf),
+    (ZoeKazan) -[:ACTED_IN]-> (WhatIf),
+    (AdamDriver) -[:ACTED_IN]-> (WhatIf),
 
 
     (BajoEstrella: Movie {title: 'Bajo la misma estrella', year:2014}),
-    (TempleHillEntertainment)
-    (TSGEntertainment)
-    (JoshBoone)
-    (Ocho)
+    (TempleHillEntertainment) -[:PRODUCED]-> (BajoEstrella),
+    (TSGEntertainment) -[:PRODUCED]-> (BajoEstrella),
+    (JoshBoone) -[:DIRECTED]-> (BajoEstrella),
+    (Ocho) -[:RATED]-> (BajoEstrella),
     (Romance)
     (Drama)
-    (ShaileneWoodley)
-    (AnselElgort)
-    (LauraDern)
-    (SamTrammell)
-    (NatWolff)
-    (WillemDafoe)
+    (ShaileneWoodley) -[:ACTED_IN]-> (BajoEstrella),
+    (AnselElgort) -[:ACTED_IN]-> (BajoEstrella),
+    (LauraDern) -[:ACTED_IN]-> (BajoEstrella),
+    (SamTrammell) -[:ACTED_IN]-> (BajoEstrella),
+    (NatWolff) -[:ACTED_IN]-> (BajoEstrella),
+    (WillemDafoe) -[:ACTED_IN]-> (BajoEstrella),
 
     (TresMetrosCielo: Movie {title: 'Tres metros sobre el cielo', year:2010}),
-    (ZetaAudiovisual)
-    (Antena3)
-    (CangrejoFilms)
-    (FernandoGonzalezMolina)
-    (CarlosRodriguez)
-    (Siete)
+    (ZetaAudiovisual) -[:PRODUCED]-> (TresMetrosCielo),
+    (Antena3) -[:PRODUCED]-> (TresMetrosCielo),
+    (CangrejoFilms) -[:PRODUCED]-> (TresMetrosCielo),
+    (FernandoGonzalezMolina) -[:DIRECTED]-> (TresMetrosCielo),
+    (CarlosRodriguez) -[:DIRECTED]-> (TresMetrosCielo),
+    (Siete) -[:RATED]-> (TresMetrosCielo),
     (Drama)
     (Romance)
-    (MarioCasas)
-    (MariaValverde)
-    (AlvaroCervantes)
-    (MarinaSalas)
-    (AndreaDuro)
-    (NereaCamacho)
-    (LuisFernandez)
-    (DiegoMartin)
+    (MarioCasas) -[:ACTED_IN]-> (TresMetrosCielo),
+    (MariaValverde) -[:ACTED_IN]-> (TresMetrosCielo),
+    (AlvaroCervantes) -[:ACTED_IN]-> (TresMetrosCielo),
+    (MarinaSalas) -[:ACTED_IN]-> (TresMetrosCielo),
+    (AndreaDuro) -[:ACTED_IN]-> (TresMetrosCielo),
+    (NereaCamacho) -[:ACTED_IN]-> (TresMetrosCielo),
+    (LuisFernandez) -[:ACTED_IN]-> (TresMetrosCielo),
+    (DiegoMartin) -[:ACTED_IN]-> (TresMetrosCielo),
 
     (ADosMetrosDeTi: Movie {title: 'A dos metros de ti', year:2019}),
-    (CBSFilms)
-    (WayfarerEntertainment)
-    (JustinBaldoni)
+    (CBSFilms) -[:PRODUCED]-> (ADosMetrosDeTi),
+    (WayfarerEntertainment) -[:PRODUCED]-> (ADosMetrosDeTi),
+    (JustinBaldoni) -[:]-> (),
     (Siete)
     (Drama)
     (Romance)
-    (HaleyLuRichardson)
-    (ColeSprouse)
+    (HaleyLuRichardson) -[:ACTED_IN]-> (ADosMetrosDeTi),
+    (ColeSprouse) -[:ACTED_IN]-> (ADosMetrosDeTi),
 
     (NoAceptanDevoluciones: Movie {title: 'No se aceptan devoluciones', year:2013}),
-    (AlebrijeCine)
-    (VideoFulano,Mengano,YAsociados)
-    (EugenioDerbez)
+    (AlebrijeCine) -[:PRODUCED]-> (NoAceptanDevoluciones),
+    (VideoFulanoMenganoYAsociados) -[:PRODUCED]-> (NoAceptanDevoluciones),
+    (EugenioDerbez) -[:]-> (),
     (Ocho)
     (Comedia)
     (Drama)
-    (EugenioDerbez)
-    (JessicaLindsey)
-    (LoretoPeralta)
-    (DanielRaymont)
-    (AlessandraRosaldo)
-    (HugoStiglitz)
-    (AgustinBernal)
+    (EugenioDerbez) -[:ACTED_IN]-> (NoAceptanDevoluciones),
+    (JessicaLindsey) -[:ACTED_IN]-> (NoAceptanDevoluciones),
+    (LoretoPeralta) -[:ACTED_IN]-> (NoAceptanDevoluciones),
+    (DanielRaymont) -[:ACTED_IN]-> (NoAceptanDevoluciones),
+    (AlessandraRosaldo) -[:ACTED_IN]-> (NoAceptanDevoluciones),
+    (HugoStiglitz) -[:ACTED_IN]-> (NoAceptanDevoluciones),
+    (AgustinBernal) -[:ACTED_IN]-> (NoAceptanDevoluciones),
 
     (PosdataTeAmo: Movie {title: 'Posdata, te amo', year:2007}),
-    (AlconEntertainment)
-    (GrosvenorPark)
-    (2SFilms)
-    (RichardLaGravenese)
+    (AlconEntertainment) -[:PRODUCED]-> (PosdataTeAmo),
+    (GrosvenorPark) -[:PRODUCED]-> (PosdataTeAmo),
+    (DosSFilms) -[:PRODUCED]-> (PosdataTeAmo),
+    (RichardLaGravenese) -[:]-> (),
     (Siete)
     (Comedia)
     (Romance)
-    (HilarySwank)
-    (GerardButler)
-    (LisaKudrow)
-    (GinaGershon)
-    (JeffreyDeanMorgan)
-    (KathyBates)
-    (HarryConnickJr.)
-    (JamesMarsters)
+    (HilarySwank) -[:ACTED_IN]-> (PosdataTeAmo),
+    (GerardButler) -[:ACTED_IN]-> (PosdataTeAmo),
+    (LisaKudrow) -[:ACTED_IN]-> (PosdataTeAmo),
+    (GinaGershon) -[:ACTED_IN]-> (PosdataTeAmo),
+    (JeffreyDeanMorgan) -[:ACTED_IN]-> (PosdataTeAmo),
+    (KathyBates) -[:ACTED_IN]-> (PosdataTeAmo),
+    (HarryConnickJr.) -[:ACTED_IN]-> (PosdataTeAmo),
+    (JamesMarsters) -[:ACTED_IN]-> (PosdataTeAmo),
 
     (GrandesHeroes: Movie {title: 'Grandes Héroes', year:2014}),
-    (Marvel)
-    (WaltDisney)
-    (DonHall)
+    (Marvel) -[:PRODUCED]-> (GrandesHeroes),
+    (WaltDisney) -[:PRODUCED]-> (GrandesHeroes),
+    (DonHall) -[:]-> (),
     (ChrisWilliams)
     (Ocho)
     (Animacion)
     (Drama)
     (Comedia)
     (Aventura)
-    (RyanPotter)
-    (ScottAdsit)
-    (DanielHenney)
-    (T.J.Miller)
-    (JamieChung)
-    (DamonWayansJr.)
-    (GenesisRodriguez)
-    (AlanTudyk)
-    (JamesCromwell)
-    (MayaRudolph)
+    (RyanPotter) -[:ACTED_IN]-> (GrandesHeroes),
+    (ScottAdsit) -[:ACTED_IN]-> (GrandesHeroes),
+    (DanielHenney) -[:ACTED_IN]-> (GrandesHeroes),
+    (T.J.Miller) -[:ACTED_IN]-> (GrandesHeroes),
+    (JamieChung) -[:ACTED_IN]-> (GrandesHeroes),
+    (DamonWayansJr.) -[:ACTED_IN]-> (GrandesHeroes),
+    (GenesisRodriguez) -[:ACTED_IN]-> (GrandesHeroes),
+    (AlanTudyk) -[:ACTED_IN]-> (GrandesHeroes),
+    (JamesCromwell) -[:ACTED_IN]-> (GrandesHeroes),
+    (MayaRudolph) -[:ACTED_IN]-> (GrandesHeroes),
 
     (LeapYear: Movie {title: 'Leap Year', year:2010}),
-    (UniversalStudios)
-    (SpyglassEntertainment)
-    (AnandTucker)
+    (UniversalStudios) -[:PRODUCED]-> (LeapYear),
+    (SpyglassEntertainment) -[:PRODUCED]-> (SpyglassEntertainment),
+    (AnandTucker) -[:]-> (),
     (Siete)
     (Comedia)
     (Romance)
-    (AmyAdams)
-    (MatthewGoode)
-    (AdamScott)
-    (JohnLithgow)
+    (AmyAdams) -[:ACTED_IN]-> (LeapYear),
+    (MatthewGoode) -[:ACTED_IN]-> (LeapYear),
+    (AdamScott) -[:ACTED_IN]-> (LeapYear),
+    (JohnLithgow) -[:ACTED_IN]-> (LeapYear),
 
     (Flipped: Movie {title: 'Flipped', year:2010}),
-    (CastleRockEntertainment)
-    (RobReiner)
+    (CastleRockEntertainment) -[:PRODUCED]-> (Flipped),
+    (RobReiner) -[:]-> (),
     (Ocho)
     (Romance)
-    (CallanMcAuliffe)
-    (MadelineCarroll)
+    (CallanMcAuliffe) -[:ACTED_IN]-> (Flipped),
+    (MadelineCarroll) -[:ACTED_IN]-> (Flipped),
 
     (LosIlusionistas: Movie {title: 'Los Ilusionistas: nada es lo que parece', year:2013}),
-    (K/OPaperProducts)
-    (LouisLeterrier)
+    (KOPaperProducts) -[:PRODUCED]-> (LosIlusionistas),
+    (LouisLeterrier) -[:]-> (),
     (Siete)
     (Suspenso)
-    (JesseEisenberg)
-    (MarkRuffalo)
-    (WoodyHarrelson)
-    (MelanieLaurent)
-    (IslaFisher)
-    (DaveFranco)
-    (MichaelCaine)
-    (MorganFreeman)
+    (JesseEisenberg) -[:ACTED_IN]-> (LosIlusionistas),
+    (MarkRuffalo) -[:ACTED_IN]-> (LosIlusionistas),
+    (WoodyHarrelson) -[:ACTED_IN]-> (LosIlusionistas),
+    (MelanieLaurent) -[:ACTED_IN]-> (LosIlusionistas),
+    (IslaFisher) -[:ACTED_IN]-> (LosIlusionistas),
+    (DaveFranco) -[:ACTED_IN]-> (LosIlusionistas),
+    (MichaelCaine) -[:ACTED_IN]-> (LosIlusionistas),
+    (MorganFreeman) -[:ACTED_IN]-> (LosIlusionistas),
 
     (BladeRunner2049: Movie {title: 'Blade Runner 2049', year:2017}),
-    (AlconEntertainment)
-    (ColumbiaPictures)
-    (BudYorkinProductions)
-    (TorridonFilms)
-    (DenisVilleneuve)
+    (AlconEntertainment) -[:PRODUCED]-> (BladeRunner2049),
+    (ColumbiaPictures) -[:PRODUCED]-> (BladeRunner2049),
+    (BudYorkinProductions) -[:PRODUCED]-> (BladeRunner2049),
+    (TorridonFilms) -[:PRODUCED]-> (BladeRunner2049),
+    (DenisVilleneuve) -[:]-> (),
     (Ocho)
     (CienciaFiccion)
-    (RyanGosling)
-    (HarrisonFord)
-    (RobinWright)
-    (DaveBautista)
-    (AnaDeArmas)
-    (SylviaHoeks)
-    (CarlaJuri)
-    (MackenzieDavis)
-    (BarkhadAbdi)
-    (DavidDastmalchian)
-    (HiamAbbass)
-    (LennieJames)
-    (JaredLeto)
+    (RyanGosling) -[:ACTED_IN]-> (BladeRunner2049),
+    (HarrisonFord) -[:ACTED_IN]-> (BladeRunner2049),
+    (RobinWright) -[:ACTED_IN]-> (BladeRunner2049),
+    (DaveBautista) -[:ACTED_IN]-> (BladeRunner2049),
+    (AnaDeArmas) -[:ACTED_IN]-> (BladeRunner2049),
+    (SylviaHoeks) -[:ACTED_IN]-> (BladeRunner2049),
+    (CarlaJuri) -[:ACTED_IN]-> (BladeRunner2049),
+    (MackenzieDavis) -[:ACTED_IN]-> (BladeRunner2049),
+    (BarkhadAbdi) -[:ACTED_IN]-> (BladeRunner2049),
+    (DavidDastmalchian) -[:ACTED_IN]-> (BladeRunner2049),
+    (HiamAbbass) -[:ACTED_IN]-> (BladeRunner2049),
+    (LennieJames) -[:ACTED_IN]-> (BladeRunner2049),
+    (JaredLeto) -[:ACTED_IN]-> (BladeRunner2049),
 
     (StarWarsEpisodio3: Movie {title: 'Star Wars: episodio III - La Venganza de los Sith', year:2005}),
-    (Lucasfilm)
-    (GeorgeLucas)
+    (Lucasfilm) -[:PRODUCED]-> (StarWarsEpisodio3),
+    (GeorgeLucas) -[:]-> (),
     (Diez)
     (CienciaFiccion)
     (Accion)
@@ -977,9 +984,9 @@ CREATE
     (ChristopherLee)
 
     (TheHungerGames: Movie {title: 'The Hunger Games', year:2012}),
-    (LionsGateEntertainment)
-    (ColorForce)
-    (GaryRoss)
+    (LionsGateEntertainment) -[:PRODUCED]-> (TheHungerGames),
+    (ColorForce) -[:PRODUCED]-> (TheHungerGames),
+    (GaryRoss) -[:]-> (),
     (Siete)
     (CienciaFiccion)
     (Accion)
@@ -997,8 +1004,8 @@ CREATE
     (AmandlaStenberg)
 
     (LaPropuesta: Movie {title: 'La Propuesta', year:2009
-    (MandevillePictures)
-    (AnneFletcher)
+    (MandevillePictures) -[:PRODUCED]-> (LaPropuesta),
+    (AnneFletcher) -[:]-> (),
     (Siete)
     (Comedia)
     (Romantico)
@@ -1011,10 +1018,10 @@ CREATE
     (AasifMandvi)
 
     (ElConjuro: Movie {title: 'El Conjuro', year:2013}),
-    (TheSafranCompany)
-    (NewLineCinema)
-    (EvergreenMediaGroup)
-    (JamesWan)
+    (TheSafranCompany) -[:PRODUCED]-> (ElConjuro),
+    (NewLineCinema) -[:PRODUCED]-> (ElConjuro),
+    (EvergreenMediaGroup) -[:PRODUCED]-> (ElConjuro),
+    (JamesWan) -[:]-> (),
     (Ocho)
     (Terror)
     (Thriller)
@@ -1024,8 +1031,8 @@ CREATE
     (LiliTaylor)
 
     (JuegoDeGemelas: Movie {title: 'Juego de Gemelas', year:1998}),
-    (WaltDisney)
-    (NancyMeyers)
+    (WaltDisney) -[:PRODUCED]-> (JuegoDeGemelas),
+    (NancyMeyers) -[:]-> (),
     (Siete)
     (Comedia)
     (Drama)
@@ -1040,8 +1047,8 @@ CREATE
     (LindsayLohan)
 
     (ElTitere: Movie {title: 'El títere', year:2007}),
-    (TwistedPictures)
-    (JamesWan)
+    (TwistedPictures) -[:PRODUCED]-> (ElTitere),
+    (JamesWan) -[:]-> (),
     (Seis)
     (Terror)
     (Suspenso)
@@ -1053,8 +1060,8 @@ CREATE
     (BobGunton)
 
     (LaMonja: Movie {title: 'La Monja', year:2018}),
-    (NewLineCinema)
-    (CorinHardy)
+    (NewLineCinema) -[:PRODUCED]-> (LaMonja),
+    (CorinHardy) -[:]-> (),
     (Cinco)
     (Terror)
     (Thriller)
@@ -1065,8 +1072,8 @@ CREATE
     (JonasBloquet)
 
     (ForrestGump: Movie {title: 'Forrest Gump', year:1994}),
-    (Paramount)
-    (RobertZemeckis)
+    (Paramount) -[:PRODUCED]-> (ForrestGump),
+    (RobertZemeckis) -[:]-> (),
     (Nueve)
     (Comedia)
     (Drama)
@@ -1078,9 +1085,9 @@ CREATE
     (MichaelConnerHumphreys)
 
     (Blackjack21: Movie {title: '21 Blackjack', year:2008}),
-    (RelativityMedia)
-    (TriggerStreetProductions)
-    (RobertLuketic)
+    (RelativityMedia) -[:PRODUCED]-> (Blackjack21),
+    (TriggerStreetProductions) -[:PRODUCED]-> (Blackjack21),
+    (RobertLuketic) -[:]-> (),
     (Ocho)
     (Drama)
     (JimSturgess)
@@ -1089,10 +1096,10 @@ CREATE
     (LaurenceFishburne)
 
     (Transformers: Movie {title: 'Transformers', year:2007}),
-    (DreamWorks)
-    (diBonaventuraPictures)
-    (HasbroPlatinumDunes)
-    (MichaelBay)
+    (DreamWorks) -[:PRODUCED]-> (Transformers),
+    (diBonaventuraPictures) -[:PRODUCED]-> (Transformers),
+    (HasbroPlatinumDunes) -[:PRODUCED]-> (Transformers),
+    (MichaelBay) -[:]-> (),
     (Siete)
     (Accion)
     (Aventura)
@@ -1110,9 +1117,9 @@ CREATE
     (JonVoight)
 
     (Gravity: Movie {title: 'Gravity', year:2013}),
-    (EsperantoFilmoj)
-    (HeydayFilms)
-    (AlfonsoCuaron)
+    (EsperantoFilmoj) -[:PRODUCED]-> (Gravity),
+    (HeydayFilms) -[:PRODUCED]-> (Gravity),
+    (AlfonsoCuaron) -[:]-> (),
     (Ocho)
     (CienciaFiccion)
     (Suspenso)
@@ -1120,10 +1127,10 @@ CREATE
     (GeorgeClooney)
 
     (LaQuintaOla: Movie {title: 'La Quinta Ola', year:2016}),
-    (GKFilms)
-    (VillageRoadshowPictures)
-    (MaterialPictures)
-    (JBlakeson)
+    (GKFilms) -[:PRODUCED]-> (LaQuintaOla),
+    (VillageRoadshowPictures) -[:PRODUCED]-> (LaQuintaOla),
+    (MaterialPictures) -[:PRODUCED]-> (LaQuintaOla),
+    (JBlakeson) -[:]-> (),
     (Cinco)
     (CienciaFiccion)
     (ChloeGraceMoretz)
@@ -1133,11 +1140,11 @@ CREATE
     (LievSchreiber)
 
     (Taken: Movie {title: 'Taken', year:2008}),
-    (EuropaCorp)
-    (Canal+)
-    (TPSStar)
-    (M6)
-    (PierreMorel)
+    (EuropaCorp) -[:PRODUCED]-> (Taken),
+    (CanalMas) -[:PRODUCED]-> (Taken),
+    (TPSStar) -[:PRODUCED]-> (Taken),
+    (M6) -[:PRODUCED]-> (Taken),
+    (PierreMorel) -[:]-> (),
     (Ocho)
     (Accion)
     (LiamNeeson)
@@ -1150,9 +1157,9 @@ CREATE
     (HollyValance)
 
     (AboutTime: Movie {title: 'About Time', year:2013}),
-    (WorkingTitleFilms)
-    (RelativityMedia)
-    (RichardCurtis)
+    (WorkingTitleFilms) -[:PRODUCED]-> (AboutTime),
+    (RelativityMedia) -[:PRODUCED]-> (AboutTime),
+    (RichardCurtis) -[:]-> (),
     (Ocho)
     (WorkingTitleFilms)
     (RelativityMedia)
@@ -1167,18 +1174,18 @@ CREATE
     (TomHollander)
 
     (TheIntern: Movie {title: 'The Intern', year:2015}),
-    (WarnerBrosPictures)
-    (NancyMeyers)
+    (WarnerBrosPictures) -[:PRODUCED]-> (TheIntern),
+    (NancyMeyers) -[:]-> (),
     (Siete)
     (Comedia)
     (RobertDeNiro)
     (AnneHathaway)
 
     (TheDayAfterTomorrow: Movie {title: 'The Day After Tomorrow', year:2004}),
-    (LionsGateEntertainment)
-    (CentropolisEnter)
-    (CentyryFox20th)
-    (RolandEmmerich)
+    (LionsGateEntertainment) -[:PRODUCED]-> (TheDayAfterTomorrow),
+    (CentropolisEnter) -[:PRODUCED]-> (TheDayAfterTomorrow),
+    (CentyryFox20th) -[:PRODUCED]-> (TheDayAfterTomorrow),
+    (RolandEmmerich) -[:]-> (),
     (Seis)
     (Catastrofe)
     (DennisQuaid)
@@ -1201,10 +1208,10 @@ CREATE
     (NestorSerrano)
 
     (Interstellar: Movie {title: 'Interstellar', year:2014}),
-    (LegendaryPictures)
-    (SyncopyFilms)
-    (LyndaObstProductions)
-    (ChristopherNolan)
+    (LegendaryPictures) -[:PRODUCED]-> (Interstellar),
+    (SyncopyFilms) -[:PRODUCED]-> (Interstellar),
+    (LyndaObstProductions) -[:PRODUCED]-> (Interstellar),
+    (ChristopherNolan) -[:]-> (),
     (Nueve)
     (CienciaFiccion)
     (MatthewMcConaughey)
@@ -1216,8 +1223,8 @@ CREATE
     (MattDamon)
 
     (HarryPotterMisterioPrincipe: Movie {title: 'Harry Potter y el Misterio del Principe', year:2009}),
-    (HeydayFilms)
-    (DavidYates)
+    (HeydayFilms) -[:PRODUCED]-> (HarryPotterMisterioPrincipe),
+    (DavidYates) -[:]-> (),
     (Ocho)
     (Aventura)
     (Fantasia)
@@ -1240,24 +1247,333 @@ CREATE
     (JassieCave)
 
     (HarryPotterPrisionerAzkaban: Movie {title: 'Harry Potter and The Prisioner of Azkaban', year:2004}),
+    (HeydayFilms) -[:PRODUCED]-> (HarryPotterPrisionerAzkaban),
+    (AlfonsoCuaron) -[:]-> (),
+    (Ocho)
+    (Fantasia)
+    (Aventura)
+    (DanielRadcliffe)
+    (EmmaWatson)
+    (RupertGrint)
+    (GaryOldman)
+    (DavidThewlis)
+    (EmmaThompson)
+    (MichaelGambon)
+    (MaggieSmith)
+
     (BackFuture3: Movie {title: 'Back to the future 3', year:1990}),
+    (AmblinEntertainment) -[:PRODUCED]-> (BackFuture3),
+    (RobertZemeckis) -[:]-> (),
+    (Siete)
+    (CienciaFiccion)
+    (Aventura)
+    (Accion)
+    (Comedia)
+    (Western) //Agregar nodo
+    (MichaelJ.Fox)
+    (ChristopherLloyd)
+    (MarySteenburgen)
+    (ThomasF.Wilson)
+    (LeaThompson)
+
     (SherlockHolmesJuegoSombras: Movie {title: 'Sherlock Holmes Juego de Sombras', year:2011}),
+    (SilverPictures) -[:PRODUCED]-> (SherlockHolmesJuegoSombras),
+    (VillageRoadshowPictures) -[:PRODUCED]-> (SherlockHolmesJuegoSombras),
+    (GuyRitchie) -[:]-> (),
+    (Siete)
+    (Accion)
+    (Suspenso)
+    (Misterio)
+    (Policiaco)
+    (RobertDowneyJr)
+    (JudeLaw)
+    (NoomiRapace)
+    (JaredHarris)
+    (StephenFry)
+    (KellyReilly)
+    (RachelMcAdams)
+
     (GrownUps: Movie {title: 'Grown ups', year:2010}),
+    (RelativityMedia) -[:PRODUCED]-> (GrownUps),
+    (DennisDugan) -[:]-> (),
+    (Seis)
+    (Comedia)
+    (AdamSandler)
+    (KevinJames)
+    (ChrisRock)
+    (RobSchneider)
+    (DavidSpade)
+    (SalmaHayek)
+    (MariaBello)
+    (MayaRudolph)
+    (JoyceVanPatten)
+    (ColinQuinn)
+    (NormMacDonald)
+    (SteveBuscemi)
+
     (TheBreakfastClub: Movie {title: 'The Breakfast Club', year:1985}),
+    (UniversalStudios) -[:PRODUCED]-> (TheBreakfastClub),
+    (JohnHughes) -[:]-> (),
+    (Ocho)
+    (Comedia)
+    (EmilioEstevez)
+    (PaulGleason)
+    (AnthonyMichaelHall)
+    (JuddNelson)
+    (MollyRingwald)
+    (AllySheedy)
+
     (LoveRosie: Movie {title: 'Love, Rosie', year:2014}),
-    (BenvenutiAlSud: Movie {title: 'Benvenuti al Sud', year:2010}),
+    (LionsGateEntertainment) -[:PRODUCED]-> (LoveRosie),
+    (ConstantinFilm) -[:PRODUCED]-> (LoveRosie),
+    (ChristianDitter) -[:]-> (),
+    (Siete)
+    (Comedia)
+    (Romance)
+    (LilyCollins)
+    (SamClaflin)
+    (TamsinEgerton)
+    (ArtParkinson)
+    (ChristianCooke)
+    (JaimeWinstone)
+    (SukiWaterhouse)
+
+    (BenvenutiAlSud: Movie {title: 'Benvenuti al Sud', year:2010
+    (MedusaFilm) -[:PRODUCED]-> (BenvenutiAlSud),
+    (LucaMiniero) -[:]-> (),
+    (Siete)
+    (Comedia)
+    (ClaudioBisio)
+    (AngelaFinocchiaro)
+    (AlessandroSiani)
+    (ValentinaLodovini)
+    (NandoPaone)
+    (GiacomoRizzo)
+    (TecoCelio)
+    (FulvioFalzarano)
+    (NunziaSchiano)
+    (AlessandroVighi)
+    (SalvatoreMisticone)
+    (RiccardoZinna)
+    (NaikeRivelli)
+    (DanyBoon)
+
     (Inception: Movie {title: 'Inception', year:2010}),
+    (LegendaryPictures) -[:PRODUCED]-> (Inception),
+    (SyncopyFilms) -[:PRODUCED]-> (Inception),
+    (VillageRoadshowPictures) -[:PRODUCED]-> (Inception),
+    (ChristopherNolan) -[:]-> (),
+    (Nueve)
+    (Drama)
+    (Suspenso)
+    (Accion)
+    (CienciaFiccion)
+    (LeonardoDiCaprio)
+    (EllenPage)
+    (MarionCotillard)
+    (JosephGOrdonLevitt)
+    (TomHardy)
+    (CillianMurphy)
+    (KenWatanabe)
+    (MichaelCaine)
+
     (StepUp3: Movie {title: 'Step Up 3', year:2010}),
+    (OffspringEntertainment) -[:PRODUCED]-> (StepUp3),
+    (TouchstonePictures) -[:PRODUCED]-> (StepUp3),
+    (JonMChu) -[:]-> (),
+    (Seis)
+    (Romance)
+    (Musical)
+    (Drama)
+    (RickMalambri)
+    (AdamSevani)
+    (SharniVinson)
+    (AlysonStoner)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     (Argo: Movie {title: 'Argo', year:2012}),
+    (GKFilms) -[:]-> (),
+    (SmokehousePictures)
+    (WarnerBros)
+    (BenAffleck)
+    (Ocho)
+    (Drama)
+    (Suspenso)
+    (BenAffleck)
+    (BryanCranston)
+    (AlanArkin)
+    (JohnGoodman)
+
     (LaVidaEsBella: Movie {title: 'La vida es bella', year:1997}),
+    (MelampoCinematografica) -[:]-> (),
+    (CecchiGoriGroup)
+    (RobertoBenigni)
+    (Nueve)
+    (Comedia)
+    (Drama)
+    (RobertoBenigni)
+    (NicolettaBraschi)
+    (GiorgioCantarini)
+
     (AGoodYear: Movie {title: 'A Good Year', year:2006}),
+    (CentyryFox20th) // 20th Century Fox
+    (RidleyScott)
+    (Siete)
+    (Comedia)
+    (Romance)
+    (RusselCrowe)
+    (AlbertFinney)
+    (MarionCotillard)
+
     (LoMejorDeMiVida: Movie {title: 'Lo mejor de mi vida', year:2015}),
+    (LakeshoreEntertainment)
+    (GabrieleMuccino)
+    (Siete)
+    (Drama)
+    (RusselCrowe)
+    (AmandaSeyfried)
+    (KylieRogers)
+    (AaronPaul)
+    (DianeKruger)
+    (QuvenzhaneWallis)
+    (BruceGreenwood)
+    (JanetMcTeer)
+    (JaneFonda)
+    (OctaviaSpencer)
+
     (ScentOfWoman: Movie {title: 'Scent Of A Woman', year:1992}),
+    (CityLightFilms)
+    (MartinBrest)
+    (Ocho)
+    (Drama)
+    (AlPacino)
+    (ChrisODonnel)
+
     (Hobbit1: Movie {title: 'El hobbit: un viaje inesperado', year:2012}),
+    (MetroGoldwynMayer)
+    (NewLineCinema)
+    (WingutFilms)
+    (PeterJackson)
+    (Ocho)
+    (Aventura)
+    (Fantasia)
+    (Accion)
+    (Drama)
+    (IanMckellen)
+    (MartinFreeman)
+    (RichardArmitage)
+    (JamesNesbitt)
+    (KenStott)
+    (SylvesterMcCoy)
+    (BarryHumphries)
+    (CateBlanchett)
+    (IanHolm)
+    (ChristopherLee)
+    (HugoWeaving)
+    (ElijahWood)
+    (AndySerkis)
+
     (Hobbit2: Movie {title: 'El hobbit: la desolación de Smaug', year:2013}),
+    (NewLineCinema)
+    (MetroGoldwynMayer)
+    (WingutFilms)
+    (PeterJackson)
+    (Ocho)
+    (Aventura)
+    (Fantasia)
+    (Accion)
+    (IanMckellen)
+    (MartinFreeman)
+    (RichardArmitage)
+    (BenedictCumberbatch)
+    (EvangelineLilly)
+    (LeePace)
+    (LukeEvans)
+    (KenStott)
+    (JamesNesbitt)
+    (OrlandoBloom)
+
     (Hobbit3: Movie {title: 'El Hobbit: la batalla de los cinco ejércitos', year:2014}),
+    (NewLineCinema)
+    (MetroGoldwynMayer)
+    (WingutFilms)
+    (PeterJackson)
+    (Siete)
+    (Aventura)
+    (Fantasia)
+    (Accion)
+    (IanMckellen)
+    (MartinFreeman)
+    (RichardArmitage)
+    (EvangelineLilly)
+    (LukeEvans)
+    (LeePace)
+    (BenedictCumberbatch)
+    (KenStott)
+    (AidanTurner)
+    (DeanOGorman)
+    (BillyConnolly)
+    (GrahamMcTavish)
+    (JamesNesbitt)
+    (StephenFry)
+    (RyanGage)
+    (CateBlanchett)
+    (IanHolm)
+    (ChristopherLee)
+    (HugoWeaving)
+    (OrlandoBloom)
+
     (ElConjuro2: Movie {title: 'El Conjuro 2', year:2016}),
+    (TheSafranCompany)
+    (NewLineCinema)
+    (AtomicMonster)
+    (RatPacEntertainment)
+    (JamesWan)
+    (Siete)
+    (Terror)
+    (VeraFarmiga)
+    (PatrickWilson)
+    (FrancesOConnor)
+    (MadisonWolfe)
+    (SimonMcBurney)
+    (FrankaPotente)
+
     (ElSeñorAnillos: Movie {title: 'El Señor de los Anillos: la Comunidad del Anillo', year:2001}),
+    (WingutFilms)
+    (TheSaulZaentzCompany)
+    (PeterJackson)
+    (Ocho)
+    (Aventura)
+    (Fantasia)
+    (ElijahWood)
+    (IanMcKellen)
+    (LivTyler)
+    (ViggoMortensen)
+    (SeanAstin)
+    (CateBlanchett)
+    (JohnRhysDavies)
+    (BillyBoyd)
+    (DominicMonaghan)
+    (OrlandoBloom)
+    (ChristopherLee)
+    (HugoWeaving)
+    (SeanBean)
+    (IanHolm)
+    (AndySerkis)
 
 
 
