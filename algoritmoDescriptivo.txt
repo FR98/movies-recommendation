@@ -24,11 +24,11 @@ MATCH (user:User {name: "User name"})-[liked:LIKED]->(movie:Movie)
 
 MATCH (movie)-[:IN_GENRE]->(genre:Genre)<-[:IN_GENRE]-(rec:Movie) WHERE NOT EXISTS( (user)-[:LIKED]->(rec) )
 WITH user, movie, rec, COUNT(genre) AS genreSelection
-MATCH (movie)<-[:ACTED_IN]-(actor:Actor)-[:ACTED_IN]->(rec)
+MATCH (movie)<-[:ACTED_IN]-(actor:Person)-[:ACTED_IN]->(rec)
 WITH user, movie, rec, genreSelection, COUNT(actor) AS actorSelection
 MATCH (movie)<-[:PRODUCED]-(productor:Productor)-[:PRODUCED]->(rec)
 WITH user, movie, rec, genreSelection, actorSelection, COUNT(productor) AS productorSelection
-OPTIONAL MATCH (movie)<-[:DIRECTED]-(director:Director)-[:DIRECTED]->(rec)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(director:Person)-[:DIRECTED]->(rec)
 WITH user, movie, rec, genreSelection, actorSelection, productorSelection, COUNT(director) AS directorSelection
 
 MATCH (movie)-[:IN_GENRE|:ACTED_IN|:DIRECTED]-(mov)
