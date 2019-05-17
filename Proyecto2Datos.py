@@ -3,96 +3,129 @@
 # Francisco Rosal 18676
 # Programa de recomendacion de peliculas
 
-# from neo4j.v1 import GraphDatabase, basic_auth
+from neo4j import GraphDatabase
 
-class MovieRecommender(object):
+driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "admin123"))
 
-    def __init__(self):
-        print("Hello World")
+def deleteLast(tx):
+    tx.run("MATCH (n) DETACH DELETE n")
 
-    def addNewMovie():
-        # Agrega una nueva pelicula y hace los enlaces
-        print("Hello World")
+def initTransaction(tx):
+    file = open("db.cypher", "r")
+    if file.mode == 'r':
+        datab = file.read()
+    tx.run(datab)
 
-    def recommendMe():
-        # Hace la busqueda en la base de datos
-        print("Hello World")
+def addNewMovieLiked(tx, user, movie):
+    # Agrega una nueva pelicula y hace los enlaces
+    # Leer un api para obtener toda la info de la pelicula?
+    print("---------------------------")
+    tx.run("""
+        MATCH (user: User {name: "$user"})
+        MERGE (user) -[:LIKED]-> (m: Movie {name: $movie})
+    """, movie=movie)
 
-    def menu():
-        print("""
-        Menu:
+def showMoviesUserLiked(tx, user):
+    print("---------------------------")
+    for movie in tx.run("""
+        MATCH (user:User {name: "$user"}) -[:LIKED]-> (movie:Movie)
+        RETURN movie.name
+    """, user=user):
+        print(movie["movie.name"])
+    print("---------------------------")
+
+def recommendMeJaccard(tx, user):
+    # Hace la busqueda en la base de datos
+    for movie in tx.run("""
+        MATCH (user:User {name: "$user"}) -[:LIKED]-> (movie:Movie)
+        MATCH (movie:Movie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(filtered)<-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(recMovie:Movie)
+            WHERE NOT EXISTS( (user)-[:LIKED]->(recMovie) )
+        WITH movie, recMovie, COUNT(filtered) AS intersection
+
+        MATCH (movie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(mov)
+        WITH movie, recMovie, intersection, COLLECT(mov.name) AS conjunto1
+        MATCH (recMovie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(re)
+        WITH movie, recMovie, intersection, conjunto1, COLLECT(re.name) AS conjunto2
+
+        WITH movie, recMovie, intersection, conjunto1, conjunto2, conjunto1 + filter(i IN conjunto2 WHERE NOT i IN conjunto1) AS union
+        RETURN movie.title AS YouLike, recMovie.title AS Recommendation, conjunto1 AS Props1, conjunto2 AS Props2,
+            ((1.0*intersection) / SIZE(union)) AS JaccardNumber
+        ORDER BY JaccardNumber DESC LIMIT 50
+    """, user=user):
+        # Descubrir como retornar mas elementos
+        print(movie["Recommendation"])
+
+def recommendMePriority(tx, user):
+    # Hace la busqueda en la base de datos
+    for movie in tx.run("""
+        MATCH (user:User {name: "$user"}) -[liked:LIKED]-> (movie:Movie)
+
+        MATCH (movie) -[:IN_GENRE]-> (genre:Genre) <-[:IN_GENRE]- (rec:Movie) WHERE NOT EXISTS( (user) -[:LIKED]-> (rec) )
+        WITH user, movie, rec, COUNT(genre) AS genreSelection
+        MATCH (movie) <-[:ACTED_IN]- (actor:Person) -[:ACTED_IN]-> (rec)
+        WITH user, movie, rec, genreSelection, COUNT(actor) AS actorSelection
+        MATCH (movie) <-[:PRODUCED]- (productor:Productor) -[:PRODUCED]-> (rec)
+        WITH user, movie, rec, genreSelection, actorSelection, COUNT(productor) AS productorSelection
+        OPTIONAL MATCH (movie) <-[:DIRECTED]- (director:Person) -[:DIRECTED]-> (rec)
+        WITH user, movie, rec, genreSelection, actorSelection, productorSelection, COUNT(director) AS directorSelection
+
+        MATCH (movie) -[:IN_GENRE|:ACTED_IN|:DIRECTED]- (mov)
+        WITH user, movie, rec, genreSelection, actorSelection, productorSelection, directorSelection, COLLECT(mov.name) AS conjunto1
+        MATCH (rec) -[:IN_GENRE|:ACTED_IN|:DIRECTED]- (re)
+        WITH user, movie, rec, genreSelection, actorSelection, productorSelection, directorSelection, conjunto1, COLLECT(re.name) AS conjunto2
+
+        RETURN user.name AS User, rec.title AS Recommendation, rec.year AS Year, conjunto1 AS Props1, conjunto2 AS Props2,
+            genreSelection AS GenreMatch, actorSelection AS ActorMatch, productorSelection AS ProductorMatch, directorSelection AS DirectorMatch,
+            ((0.5*genreSelection)+(0.25*actorSelection)+(0.25*directorSelection))/(genreSelection+actorSelection+directorSelection) AS MatchScore
+        ORDER BY MatchScore DESC LIMIT 50
+    """, user=user):
+        # Descubrir como retornar mas elementos
+        print(movie["Recommendation"])
+
+def menu():
+    return ("""
+    -----------------------------
+    Menu:
     1. Show movies you liked
     2. Add movie to your list
     3. Find movies related to
     4. Salir
-        """)
+    -----------------------------
+    """)
 
 print("Welcome to the movie recommender")
-mr = MovieRecommender()
 
-continuar = True
-while continuar:
-    mr.menu()
-    option = input("Option: ")
+with driver.session() as session:
+    session.write_transaction(deleteLast)
+    session.write_transaction(initTransaction)
 
-    if (option == "1"):
-        print("Movies you liked:")
-        # Show Movies
-    elif (option == "2"):
-        newMovie = input("Enter the name of the movie you liked: ")
-        # Algo mas
-    elif (option == "3"):
-        findRelateTo = input("Enter the name of the movie: ")
-        # Algo mas
-    elif (option == "4"):
-        print("Bye bye")
-        continuar = False
+session = driver.session()
+
+userEnter = True
+while userEnter:
+    user = input("Ingrese su nombre de usuario: ")
+    if userExist(user):
+
+        continuar = True
+        while continuar:
+            print(menu())
+            option = input("Option: ")
+
+            if (option == "1"):
+                print("Movies you liked:")
+                session.read_transaction(showMoviesUserLiked, user)
+            elif (option == "2"):
+                newMovie = input("Enter the name of the movie you want to add: ")
+                session.write_transaction(addNewMovieLiked, user, newMovie)
+            elif (option == "3"):
+                findMovieRelateTo = input("Enter the name of the movie: ")
+                session.read_transaction(recommendMeJaccard, user)
+                session.read_transaction(recommendMePriority, user)
+            elif (option == "4"):
+                print("Bye bye")
+                continuar = False
+                userEnter = False
+            else:
+                print("Wrong option!")
     else:
-        print("Wrong option!")
-
-
-
-
-
-
-
-
-# class DataBase(object):
-#
-#     def __init__(self, uri, user, password):
-#         self._driver = GraphDatabase.driver(uri, auth=(user, password))
-#
-#     def close(self):
-#         self._driver.close()
-#
-#     def print_greeting(self, message):
-#         with self._driver.session() as session:
-#             greeting = session.write_transaction(self._create_and_return_greeting, message)
-#             print(greeting)
-#
-#     @staticmethod
-#     def _create_and_return_greeting(tx, message):
-#         result = tx.run("CREATE (a:Greeting) "
-#                         "SET a.message = $message "
-#                         "RETURN a.message + ', from node ' + id(a)", message=message)
-#         return result.single()[0]
-
-
-# ----------------------------------------------
-
-# driver = GraphDatabase.driver(
-#     "bolt://52.91.116.38:38229",
-#     auth=basic_auth("neo4j", "frame-partners-staplers"))
-# session = driver.session()
-#
-# cypher_query = '''
-# MATCH (n)
-# RETURN id(n) AS id
-# LIMIT $limit
-# '''
-#
-# results = session.run(cypher_query,
-#   parameters={"limit": 10})
-#
-# for record in results:
-#   print(record['id'])
+        print("User doesnt exist, try again.")
