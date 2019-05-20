@@ -11,33 +11,42 @@ def deleteLast(tx):
     tx.run("MATCH (n) DETACH DELETE n")
 
 def initTransaction(tx):
-    file = open("db.cypher", "r")
-    if file.mode == 'r':
-        datab = file.read()
-    tx.run(datab)
+    # file = open("db.txt", "r")
+    # if file.mode == 'r':
+    #     datab = file.read()
+    # tx.run(datab)
 
-def addNewMovieLiked(tx, user, movie):
-    # Agrega una nueva pelicula y hace los enlaces
-    # Leer un api para obtener toda la info de la pelicula?
-    print("---------------------------")
-    tx.run("""
-        MATCH (user: User {name: "$user"})
-        MERGE (user) -[:LIKED]-> (m: Movie {name: $movie})
-    """, movie=movie)
+    # tx.run("""
+    # """)
+    pass
+
+def userExist(tx, user):
+    for result in tx.run("""
+        MATCH (user: User) WHERE user.name = $user
+        RETURN user.name
+    """, user=user):
+        userReturned = result["user.name"]
+        if (userReturned):
+            print("---------------------------")
+            print("Welcome " + userReturned)
+            return True
+        return False
 
 def showMoviesUserLiked(tx, user):
     print("---------------------------")
     for movie in tx.run("""
-        MATCH (user:User {name: "$user"}) -[:LIKED]-> (movie:Movie)
-        RETURN movie.name
+        MATCH (user:User) WHERE user.name = $user
+        MATCH (user) -[:LIKED]-> (movie:Movie)
+        RETURN movie.title
     """, user=user):
-        print(movie["movie.name"])
+        print(movie["movie.title"])
     print("---------------------------")
 
 def recommendMeJaccard(tx, user):
     # Hace la busqueda en la base de datos
     for movie in tx.run("""
-        MATCH (user:User {name: "$user"}) -[:LIKED]-> (movie:Movie)
+        MATCH (user:User) WHERE user.name = $user
+        MATCH (user) -[:LIKED]-> (movie:Movie)
         MATCH (movie:Movie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(filtered)<-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(recMovie:Movie)
             WHERE NOT EXISTS( (user)-[:LIKED]->(recMovie) )
         WITH movie, recMovie, COUNT(filtered) AS intersection
@@ -50,7 +59,7 @@ def recommendMeJaccard(tx, user):
         WITH movie, recMovie, intersection, conjunto1, conjunto2, conjunto1 + filter(i IN conjunto2 WHERE NOT i IN conjunto1) AS union
         RETURN movie.title AS YouLike, recMovie.title AS Recommendation, conjunto1 AS Props1, conjunto2 AS Props2,
             ((1.0*intersection) / SIZE(union)) AS JaccardNumber
-        ORDER BY JaccardNumber DESC LIMIT 50
+        ORDER BY JaccardNumber DESC LIMIT 25
     """, user=user):
         # Descubrir como retornar mas elementos
         print(movie["Recommendation"])
@@ -58,7 +67,8 @@ def recommendMeJaccard(tx, user):
 def recommendMePriority(tx, user):
     # Hace la busqueda en la base de datos
     for movie in tx.run("""
-        MATCH (user:User {name: "$user"}) -[liked:LIKED]-> (movie:Movie)
+        MATCH (user:User) WHERE user.name = $user
+        MATCH (user) -[:LIKED]-> (movie:Movie)
 
         MATCH (movie) -[:IN_GENRE]-> (genre:Genre) <-[:IN_GENRE]- (rec:Movie) WHERE NOT EXISTS( (user) -[:LIKED]-> (rec) )
         WITH user, movie, rec, COUNT(genre) AS genreSelection
@@ -77,10 +87,19 @@ def recommendMePriority(tx, user):
         RETURN user.name AS User, rec.title AS Recommendation, rec.year AS Year, conjunto1 AS Props1, conjunto2 AS Props2,
             genreSelection AS GenreMatch, actorSelection AS ActorMatch, productorSelection AS ProductorMatch, directorSelection AS DirectorMatch,
             ((0.5*genreSelection)+(0.25*actorSelection)+(0.25*directorSelection))/(genreSelection+actorSelection+directorSelection) AS MatchScore
-        ORDER BY MatchScore DESC LIMIT 50
+        ORDER BY MatchScore DESC LIMIT 25
     """, user=user):
         # Descubrir como retornar mas elementos
         print(movie["Recommendation"])
+
+def addNewMovieLiked(tx, user, movie):
+    # Agrega una nueva pelicula y hace los enlaces
+    # Leer un api para obtener toda la info de la pelicula?
+    print("---------------------------")
+    tx.run("""
+    MATCH (user:User) WHERE user.name = $user
+    MERGE (user) -[:LIKED]-> (m: Movie {title: $movie})
+    """, user=user, movie=movie)
 
 def menu():
     return ("""
@@ -88,7 +107,7 @@ def menu():
     Menu:
     1. Show movies you liked
     2. Add movie to your list
-    3. Find movies related to
+    3. Recommend me
     4. Salir
     -----------------------------
     """)
@@ -96,7 +115,7 @@ def menu():
 print("Welcome to the movie recommender")
 
 with driver.session() as session:
-    session.write_transaction(deleteLast)
+    #session.write_transaction(deleteLast)
     session.write_transaction(initTransaction)
 
 session = driver.session()
@@ -104,7 +123,8 @@ session = driver.session()
 userEnter = True
 while userEnter:
     user = input("Ingrese su nombre de usuario: ")
-    if userExist(user):
+    exist = session.read_transaction(userExist, user)
+    if exist:
 
         continuar = True
         while continuar:
@@ -112,13 +132,13 @@ while userEnter:
             option = input("Option: ")
 
             if (option == "1"):
-                print("Movies you liked:")
+                print("Movies "+user+" liked:")
                 session.read_transaction(showMoviesUserLiked, user)
             elif (option == "2"):
                 newMovie = input("Enter the name of the movie you want to add: ")
                 session.write_transaction(addNewMovieLiked, user, newMovie)
             elif (option == "3"):
-                findMovieRelateTo = input("Enter the name of the movie: ")
+                #findMovieRelateTo = input("Enter the name of the movie: ")
                 session.read_transaction(recommendMeJaccard, user)
                 session.read_transaction(recommendMePriority, user)
             elif (option == "4"):
