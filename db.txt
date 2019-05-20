@@ -21,7 +21,7 @@
 // Movie -[:WON]-> Award
 
 // Borra todo
-MATCH (n) DETACH DELETE n;
+//MATCH (n) DETACH DELETE n;
 
 // Movies
 CREATE
@@ -2238,4 +2238,4 @@ CREATE
 // MATCH (n) DETACH DELETE n;
 
 // Retorna todo
-MATCH (n) RETURN n;
+//MATCH (n) RETURN n;

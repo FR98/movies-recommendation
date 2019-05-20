@@ -11,14 +11,10 @@ def deleteLast(tx):
     tx.run("MATCH (n) DETACH DELETE n")
 
 def initTransaction(tx):
-    # file = open("db.txt", "r")
-    # if file.mode == 'r':
-    #     datab = file.read()
-    # tx.run(datab)
-
-    # tx.run("""
-    # """)
-    pass
+    file = open("db.txt", "r", encoding='utf-8')
+    datab = file.read()
+    tx.run(datab)
+    file.close
 
 def userExist(tx, user):
     for result in tx.run("""
@@ -115,7 +111,7 @@ def menu():
 print("Welcome to the movie recommender")
 
 with driver.session() as session:
-    #session.write_transaction(deleteLast)
+    session.write_transaction(deleteLast)
     session.write_transaction(initTransaction)
 
 session = driver.session()
