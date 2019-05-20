@@ -86,6 +86,25 @@ def recommendMePriority(tx, user):
     """, user=user):
         print("Because you like: " + movie["YouLike"] + "\nWe recommend: \t" + movie["Recommendation"] + "\n")
 
+def findMovieRelateTo(tx, movie):
+    # Hace la busqueda en la base de datos
+    for movie in tx.run("""
+        MATCH (movie:Movie) WHERE movie.title = $movie
+        MATCH (movie:Movie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(filtered)<-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(recMovie:Movie)
+        WITH movie, recMovie, COUNT(filtered) AS intersection
+
+        MATCH (movie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(mov)
+        WITH movie, recMovie, intersection, COLLECT(mov.name) AS conjunto1
+        MATCH (recMovie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(re)
+        WITH movie, recMovie, intersection, conjunto1, COLLECT(re.name) AS conjunto2
+
+        WITH movie, recMovie, intersection, conjunto1, conjunto2, conjunto1 + filter(i IN conjunto2 WHERE NOT i IN conjunto1) AS union
+        RETURN movie.title AS YouLike, recMovie.title AS Recommendation, conjunto1 AS Props1, conjunto2 AS Props2,
+            ((1.0*intersection) / SIZE(union)) AS JaccardNumber
+        ORDER BY JaccardNumber DESC LIMIT 15
+    """, movie=movie):
+        print(movie["Recommendation"])
+
 def addNewMovieLiked(tx, user, movie):
     # Agrega una nueva pelicula y hace los enlaces
     # Leer un api para obtener toda la info de la pelicula?
@@ -102,7 +121,8 @@ def menu():
     1. Show movies you liked
     2. Add movie to your list
     3. Recommend me
-    4. Salir
+    4. Find movie relate to
+    5. Salir
     -----------------------------
     """)
 
@@ -132,10 +152,15 @@ while userEnter:
                 newMovie = input("Enter the name of the movie you want to add: ")
                 session.write_transaction(addNewMovieLiked, user, newMovie)
             elif (option == "3"):
-                #findMovieRelateTo = input("Enter the name of the movie: ")
                 session.read_transaction(recommendMeJaccard, user)
                 session.read_transaction(recommendMePriority, user)
             elif (option == "4"):
+                movie = input("Enter the name of the movie: ")
+                print("---------------------------")
+                print("Movies related to " + movie)
+                print("---------------------------")
+                session.read_transaction(findMovieRelateTo, movie)
+            elif (option == "5"):
                 print("Bye bye")
                 continuar = False
                 userEnter = False
