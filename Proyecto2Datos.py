@@ -4,6 +4,11 @@
 # Programa de recomendacion de peliculas
 
 from neo4j import GraphDatabase
+import omdb
+# Para usar el API base de datos de peliculas:
+# pip install omdb
+API_KEY = "3f058774"
+omdb.set_default('apikey', API_KEY)
 
 driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "admin123"))
 
@@ -105,14 +110,68 @@ def findMovieRelateTo(tx, movie):
     """, movie=movie):
         print(movie["Recommendation"])
 
-def addNewMovieLiked(tx, user, movie):
+def addNewMovieLiked(tx, user, movieInfo):
     # Agrega una nueva pelicula y hace los enlaces
-    # Leer un api para obtener toda la info de la pelicula?
+    movieTitle = movieInfo["title"]
+    if movieInfo["year"]:
+        movieYear = movieInfo["year"]
+    else:
+        movieYear = "NaN"
+
+    if movieInfo["director"]:
+        movieDirector = movieInfo["director"]
+    else:
+        movieDirector = "NaN"
+
+    if movieInfo["actors"]:
+        movieActor = movieInfo["actors"]
+    else:
+        movieActor = "NaN"
+
+    if movieInfo["production"]:
+        movieProducer = movieInfo["production"]
+    else:
+        movieProducer = "NaN"
+
+    if movieInfo["genre"]:
+        movieGenre = movieInfo["genre"]
+    else:
+        movieGenre = "NaN"
+
     print("---------------------------")
     tx.run("""
-    MATCH (user:User) WHERE user.name = $user
-    MERGE (user) -[:LIKED]-> (m: Movie {title: $movie})
-    """, user=user, movie=movie)
+        MATCH (user:User) WHERE user.name = $user
+        MERGE (user) -[:LIKED]-> (m: Movie {title: $movie, year: $year})
+    """, user=user, movie=movieTitle, year=movieYear)
+
+    directors = movieDirector.split(", ")
+    for d in directors:
+        tx.run("""
+            MATCH (movie:Movie) WHERE movie.title = $movie
+            MERGE (movie) <-[:DIRECTED]- (:Person {name: $name})
+        """, name=d, movie=movieTitle)
+
+    actors = movieActor.split(", ")
+    for a in actors:
+        tx.run("""
+            MATCH (movie:Movie) WHERE movie.title = $movie
+            MERGE (movie) <-[:ACTED_IN]- (:Person {name: $name})
+        """, name=a, movie=movieTitle)
+
+    productors = movieProducer.split(", ")
+    for p in productors:
+        tx.run("""
+            MATCH (movie:Movie) WHERE movie.title = $movie
+            MERGE (movie) <-[:PRODUCED]- (:Productor {name: $name})
+        """, name=p, movie=movieTitle)
+
+    genres = movieGenre.split(", ")
+    for g in genres:
+        tx.run("""
+            MATCH (movie:Movie) WHERE movie.title = $movie
+            MERGE (movie) -[:IN_GENRE]-> (:Genre {name: $name})
+        """, name=g, movie=movieTitle)
+
 
 def menu():
     return ("""
@@ -150,7 +209,15 @@ while userEnter:
                 session.read_transaction(showMoviesUserLiked, user)
             elif (option == "2"):
                 newMovie = input("Enter the name of the movie you want to add: ")
-                session.write_transaction(addNewMovieLiked, user, newMovie)
+                res = omdb.get(title=newMovie)
+                if res:
+                    que1 = input("Is this your movie? \t" + res["title"] + "\n (yes/no): ")
+                    if que1 == "yes":
+                        session.write_transaction(addNewMovieLiked, user, res)
+                    else:
+                        print("Sorry, maybe it's not its name... try again :)")
+                else:
+                    print("Sorry, maybe it's not its name... try again :)")
             elif (option == "3"):
                 session.read_transaction(recommendMeJaccard, user)
                 session.read_transaction(recommendMePriority, user)
