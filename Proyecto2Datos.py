@@ -55,10 +55,9 @@ def recommendMeJaccard(tx, user):
         WITH movie, recMovie, intersection, conjunto1, conjunto2, conjunto1 + filter(i IN conjunto2 WHERE NOT i IN conjunto1) AS union
         RETURN movie.title AS YouLike, recMovie.title AS Recommendation, conjunto1 AS Props1, conjunto2 AS Props2,
             ((1.0*intersection) / SIZE(union)) AS JaccardNumber
-        ORDER BY JaccardNumber DESC LIMIT 25
+        ORDER BY JaccardNumber DESC LIMIT 15
     """, user=user):
-        # Descubrir como retornar mas elementos
-        print(movie["Recommendation"])
+        print("Because you like: " + movie["YouLike"] + "\nWe recommend: \t" + movie["Recommendation"] + "\n")
 
 def recommendMePriority(tx, user):
     # Hace la busqueda en la base de datos
@@ -80,13 +79,12 @@ def recommendMePriority(tx, user):
         MATCH (rec) -[:IN_GENRE|:ACTED_IN|:DIRECTED]- (re)
         WITH user, movie, rec, genreSelection, actorSelection, productorSelection, directorSelection, conjunto1, COLLECT(re.name) AS conjunto2
 
-        RETURN user.name AS User, rec.title AS Recommendation, rec.year AS Year, conjunto1 AS Props1, conjunto2 AS Props2,
+        RETURN movie.title AS YouLike, rec.title AS Recommendation, rec.year AS Year, conjunto1 AS Props1, conjunto2 AS Props2,
             genreSelection AS GenreMatch, actorSelection AS ActorMatch, productorSelection AS ProductorMatch, directorSelection AS DirectorMatch,
             ((0.5*genreSelection)+(0.25*actorSelection)+(0.25*directorSelection))/(genreSelection+actorSelection+directorSelection) AS MatchScore
-        ORDER BY MatchScore DESC LIMIT 25
+        ORDER BY MatchScore DESC LIMIT 15
     """, user=user):
-        # Descubrir como retornar mas elementos
-        print(movie["Recommendation"])
+        print("Because you like: " + movie["YouLike"] + "\nWe recommend: \t" + movie["Recommendation"] + "\n")
 
 def addNewMovieLiked(tx, user, movie):
     # Agrega una nueva pelicula y hace los enlaces
