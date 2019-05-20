@@ -5,6 +5,7 @@
 
 from neo4j import GraphDatabase
 import omdb
+
 # Para usar el API base de datos de peliculas:
 # pip install omdb
 API_KEY = "3f058774"
@@ -139,6 +140,15 @@ def addNewMovieLiked(tx, user, movieInfo):
         movieGenre = "NaN"
 
     print("---------------------------")
+
+
+
+
+
+    #-------------------------------------------REVISAR QUE NO SE DUPLIQUEN LAS PELICULAS, ACTORES, DIRECTORES... ETC
+
+
+
     tx.run("""
         MATCH (user:User) WHERE user.name = $user
         MERGE (user) -[:LIKED]-> (m: Movie {title: $movie, year: $year})
