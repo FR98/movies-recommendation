@@ -141,93 +141,94 @@ def addNewMovieLiked(tx, user, movieInfo):
 
     print("---------------------------")
 
-    for res1 in tx.run("""
+    res1 = tx.run("""
         MATCH (movie:Movie) WHERE movie.title = $movie
         RETURN movie
-    """, movie=movieTitle):
-        if res1["movie"]:
-            tx.run("""
-                MATCH (user:User) WHERE user.name = $user
-                MATCH (movie:Movie) WHERE movie.title = $movie
-                MERGE (user) -[:LIKED]-> (movie)
-            """, user=user, movie=movieTitle)
-        else:
-            tx.run("""
-                MATCH (user:User) WHERE user.name = $user
-                MERGE (user) -[:LIKED]-> (m: Movie {title: $movie, year: $year})
-            """, user=user, movie=movieTitle, year=movieYear)
+    """, movie=movieTitle)
+
+    if res1.single() != None:
+        tx.run("""
+            MATCH (user:User) WHERE user.name = $user
+            MATCH (movie:Movie) WHERE movie.title = $movie
+            MERGE (user) -[:LIKED]-> (movie)
+        """, user=user, movie=movieTitle)
+    else:
+        tx.run("""
+            MATCH (user:User) WHERE user.name = $user
+            MERGE (user) -[:LIKED]-> (m: Movie {title: $movie, year: $year})
+        """, user=user, movie=movieTitle, year=movieYear)
 
     directors = movieDirector.split(", ")
     for d in directors:
-        for res2 in tx.run("""
+        res2 = tx.run("""
             MATCH (director:Person) WHERE director.name = $name
             RETURN director
-        """, name=d):
-            if res2["director"]:
-                tx.run("""
-                    MATCH (movie:Movie) WHERE movie.title = $movie
-                    MATCH (director:Person) WHERE director.name = $name
-                    MERGE (director) -[:DIRECTED]-> (movie)
-                """, name=d, movie=movieTitle)
-            else:
-                tx.run("""
-                    MATCH (movie:Movie) WHERE movie.title = $movie
-                    MERGE (movie) <-[:DIRECTED]- (:Person {name: $name})
-                """, name=d, movie=movieTitle)
+        """, name=d)
+        if res2.single() != None:
+            tx.run("""
+                MATCH (movie:Movie) WHERE movie.title = $movie
+                MATCH (director:Person) WHERE director.name = $name
+                MERGE (director) -[:DIRECTED]-> (movie)
+            """, name=d, movie=movieTitle)
+        else:
+            tx.run("""
+                MATCH (movie:Movie) WHERE movie.title = $movie
+                MERGE (movie) <-[:DIRECTED]- (:Person {name: $name})
+            """, name=d, movie=movieTitle)
 
     actors = movieActor.split(", ")
     for a in actors:
-        for res3 in tx.run("""
+        res3 = tx.run("""
             MATCH (actor:Person) WHERE actor.name = $name
             RETURN actor
-        """, name=a):
-            if res3["actor"]:
-                tx.run("""
-                    MATCH (movie:Movie) WHERE movie.title = $movie
-                    MATCH (actor:Person) WHERE actor.name = $name
-                    MERGE (actor) -[:ACTED_IN]-> (movie)
-                """, name=a, movie=movieTitle)
-            else:
-                tx.run("""
-                    MATCH (movie:Movie) WHERE movie.title = $movie
-                    MERGE (movie) <-[:ACTED_IN]- (:Person {name: $name})
-                """, name=a, movie=movieTitle)
+        """, name=a)
+        if res3.single() != None:
+            tx.run("""
+                MATCH (movie:Movie) WHERE movie.title = $movie
+                MATCH (actor:Person) WHERE actor.name = $name
+                MERGE (actor) -[:ACTED_IN]-> (movie)
+            """, name=a, movie=movieTitle)
+        else:
+            tx.run("""
+                MATCH (movie:Movie) WHERE movie.title = $movie
+                MERGE (movie) <-[:ACTED_IN]- (:Person {name: $name})
+            """, name=a, movie=movieTitle)
 
     productors = movieProducer.split(", ")
     for p in productors:
-        for res4 in tx.run("""
+        res4 = tx.run("""
             MATCH (productor:Productor) WHERE productor.name = $name
             RETURN productor
-        """, name=p):
-            if res4["productor"]:
-                tx.run("""
-                    MATCH (movie:Movie) WHERE movie.title = $movie
-                    MATCH (productor:Productor) WHERE productor.name = $name
-                    MERGE (productor) -[:PRODUCED]-> (movie)
-                """, name=p, movie=movieTitle)
-            else:
-                tx.run("""
-                    MATCH (movie:Movie) WHERE movie.title = $movie
-                    MERGE (movie) <-[:PRODUCED]- (:Productor {name: $name})
-                """, name=p, movie=movieTitle)
+        """, name=p)
+        if res4.single() != None:
+            tx.run("""
+                MATCH (movie:Movie) WHERE movie.title = $movie
+                MATCH (productor:Productor) WHERE productor.name = $name
+                MERGE (productor) -[:PRODUCED]-> (movie)
+            """, name=p, movie=movieTitle)
+        else:
+            tx.run("""
+                MATCH (movie:Movie) WHERE movie.title = $movie
+                MERGE (movie) <-[:PRODUCED]- (:Productor {name: $name})
+            """, name=p, movie=movieTitle)
 
     genres = movieGenre.split(", ")
     for g in genres:
-        for res5 in tx.run("""
+        res5 = tx.run("""
             MATCH (genre:Genre) WHERE genre.name = $name
             RETURN genre
-        """, name=g):
-            if res5["genre"]:
-                tx.run("""
-                    MATCH (movie:Movie) WHERE movie.title = $movie
-                    MATCH (genre:Genre) WHERE genre.name = $name
-                    MERGE (genre) <-[:IN_GENRE]- (movie)
-                """, name=g, movie=movieTitle)
-            else:
-                tx.run("""
-                    MATCH (movie:Movie) WHERE movie.title = $movie
-                    MERGE (movie) -[:IN_GENRE]-> (:Genre {name: $name})
-                """, name=g, movie=movieTitle)
+        """, name=g)
+        if res5.single() != None:
+            tx.run("""
+                MATCH (movie:Movie) WHERE movie.title = $movie
+                MATCH (genre:Genre) WHERE genre.name = $name
+                MERGE (genre) <-[:IN_GENRE]- (movie)
+            """, name=g, movie=movieTitle)
+        else:
+            tx.run("""
+                MATCH (movie:Movie) WHERE movie.title = $movie
+                MERGE (movie) -[:IN_GENRE]-> (:Genre {name: $name})
+            """, name=g, movie=movieTitle)
 
 
 def menu():
