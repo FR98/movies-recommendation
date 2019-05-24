@@ -16,6 +16,7 @@ El proyecto esta formado por lo siguiente:
   * Actores * 0.25
   * Director * 0.25
   La suma de estas multiplicaciones se divide dentro de la suma de las cantidades de coincidencias entre ambas peliculas.
+- Algortimo de recomendacion a partir de una pelicula el cual esta basado en el algoritmo de Jaccard, sin tener que ser esta pelicula entre los favoritos del usuario.
 
 En la carpeta que contiene todos los archivos se puede encontrar lo siguiente:
 - Un documento PDF explicando el proyecto por medio de la metodologia de design thinking. (Primera parte.pdf)
