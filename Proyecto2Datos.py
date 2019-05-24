@@ -277,7 +277,13 @@ while userEnter:
                 else:
                     print("Sorry, maybe it's not its name... try again :)")
             elif (option == "3"):
+                print("----------------------------------------------------------")
+                print("               Jaccard Recommendation")
+                print("----------------------------------------------------------\n")
                 session.read_transaction(recommendMeJaccard, user)
+                print("\n----------------------------------------------------------")
+                print("               Priority Recommendation")
+                print("----------------------------------------------------------\n")
                 session.read_transaction(recommendMePriority, user)
             elif (option == "4"):
                 movie = input("Enter the name of the movie: ")
