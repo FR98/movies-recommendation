@@ -11,18 +11,22 @@ import omdb
 API_KEY = "3f058774"
 omdb.set_default('apikey', API_KEY)
 
+# Conexion a la base de datos
 driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "admin123"))
 
 def deleteLast(tx):
+    # Elimina los nodos y conexiones existentes
     tx.run("MATCH (n) DETACH DELETE n")
 
 def initTransaction(tx):
+    # Lee el archivo que contien
     file = open("db.txt", "r", encoding='utf-8')
     datab = file.read()
     tx.run(datab)
     file.close
 
 def userExist(tx, user):
+    # Comprueba que el usuario ingresado exista en la base de datos actual
     for result in tx.run("""
         MATCH (user: User) WHERE user.name = $user
         RETURN user.name
@@ -35,6 +39,7 @@ def userExist(tx, user):
         return False
 
 def showMoviesUserLiked(tx, user):
+    # Imprime las peliculas que el usuario tiene en sus favoritas
     print("---------------------------")
     for movie in tx.run("""
         MATCH (user:User) WHERE user.name = $user
@@ -45,7 +50,7 @@ def showMoviesUserLiked(tx, user):
     print("---------------------------")
 
 def recommendMeJaccard(tx, user):
-    # Hace la busqueda en la base de datos
+    # Hace la busqueda en la base de datos ordenando por un valor llamado el indice de Jaccard
     for movie in tx.run("""
         MATCH (user:User) WHERE user.name = $user
         MATCH (user) -[:LIKED]-> (movie:Movie)
@@ -66,7 +71,7 @@ def recommendMeJaccard(tx, user):
         print("Because you like: " + movie["YouLike"] + "\nWe recommend: \t" + movie["Recommendation"] + "\n")
 
 def recommendMePriority(tx, user):
-    # Hace la busqueda en la base de datos
+    # Hace la busqueda en la base de datos ordenando los resultados por prioridad de propiedades de las peliculas
     for movie in tx.run("""
         MATCH (user:User) WHERE user.name = $user
         MATCH (user) -[:LIKED]-> (movie:Movie)
@@ -93,7 +98,7 @@ def recommendMePriority(tx, user):
         print("Because you like: " + movie["YouLike"] + "\nWe recommend: \t" + movie["Recommendation"] + "\n")
 
 def findMovieRelateTo(tx, movie):
-    # Hace la busqueda en la base de datos
+    # Hace la busqueda en la base de datos a partir de una pelicula ingresada, se busca las mas similares a esta
     for movie in tx.run("""
         MATCH (movie:Movie) WHERE movie.title = $movie
         MATCH (movie:Movie)-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(filtered)<-[:IN_GENRE|:ACTED_IN|:PRODUCED|:DIRECTED]-(recMovie:Movie)
@@ -146,6 +151,7 @@ def addNewMovieLiked(tx, user, movieInfo):
         RETURN movie
     """, movie=movieTitle)
 
+    # Si existe en la db
     if res1.single() != None:
         tx.run("""
             MATCH (user:User) WHERE user.name = $user
@@ -153,6 +159,7 @@ def addNewMovieLiked(tx, user, movieInfo):
             MERGE (user) -[:LIKED]-> (movie)
         """, user=user, movie=movieTitle)
     else:
+        # Sino existe se crea
         tx.run("""
             MATCH (user:User) WHERE user.name = $user
             MERGE (user) -[:LIKED]-> (m: Movie {title: $movie, year: $year})
@@ -232,6 +239,7 @@ def addNewMovieLiked(tx, user, movieInfo):
 
 
 def menu():
+    # Menu
     return ("""
     -----------------------------
     Menu:
@@ -245,12 +253,14 @@ def menu():
 
 print("Welcome to the movie recommender")
 
+# Acciones que inician y reinician la db al correr el programa
 with driver.session() as session:
     session.write_transaction(deleteLast)
     session.write_transaction(initTransaction)
 
 session = driver.session()
 
+# Secuencia del programa
 userEnter = True
 while userEnter:
     user = input("Ingrese su nombre de usuario: ")
